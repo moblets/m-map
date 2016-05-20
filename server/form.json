@@ -1,0 +1,36 @@
+{
+  "fields": [
+    {
+      "name": "password",
+      "type": "number",
+      "max-length": 4,
+      "min-length": 4,
+      "required": true
+    },
+    {
+      "name": "locations",
+      "type": "field_group",
+      "fields": [
+        {
+          "name": "address",
+          "type": "text",
+          "min-length": 3,
+          "max-length": 255,
+          "required": true
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "min-length": 3,
+          "max-length": 255,
+          "required": true
+        },
+        {
+          "name": "description",
+          "type": "text-area",
+          "max-length": 1023
+        }
+      ]
+    }
+  ]
+}
