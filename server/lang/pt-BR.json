@@ -4,22 +4,25 @@
         "hint": "Crie um mapa com uma lista de lugares",
         "description": "Preencha os campos abaixo para criar a página de mapa"
     },
-    "password": {
-        "label": "Senha",
-        "hint": "Insira uma senha de 4 caracteres",
-        "placeholder": "1423"
+    "locations": {
+        "label": "Lista de lugares",
+        "hint": "Insira os lugares desejados",
+        "list_button": "Adicionar lugares"
+    },
+    "address": {
+        "label": "Endereço",
+        "hint": "Endereço exato do lugar",
+        "placeholder": "1062 Lombard St - San Francisco, CA 94133 - EUA",
+        "error_address": "Endereço não encontrado"
+    },
+    "title": {
+        "label": "Título",
+        "hint": "Título do lugar",
+        "placeholder": "Lombard Street"
     },
     "description": {
-        "label": "Descrição do cartão",
-        "hint": "Este é o texto que ficará no topo do seu cartão",
-        "placeholder": "Almoce 9 vezes e a 10ª é grátis"
-    },
-    "quantity": {
-        "label": "Quantidade",
-        "hint": "Escolha a quantidade de selos para se obter o prêmio",
-        "default": "Escolha uma quantidade",
-        "value_3": "3 carimbos",
-        "value_6": "6 carimbos",
-        "value_9": "9 carimbos"
+        "label": "Descrição",
+        "hint": "Descrição do lugar",
+        "placeholder": "Rua fenomenal!"
     }
 }

@@ -4,22 +4,25 @@
         "hint": "Create a map with a list of locations",
         "description": "Fill out the form below to create the map page"
     },
-    "password": {
-        "label": "Password",
-        "hint": "Insert a 4 chars password",
-        "placeholder": "1423"
+    "locations": {
+        "label": "Locations list",
+        "hint": "Insert the desired locations",
+        "list_button": "Add locations"
+    },
+    "address": {
+        "label": "Address",
+        "hint": "The exact address of the location",
+        "placeholder": "1062 Lombard St - San Francisco, CA 94133 - EUA",
+        "error_address": "Address not found"
+    },
+    "title": {
+        "label": "Title",
+        "hint": "The title of the location",
+        "placeholder": "Lombard Street"
     },
     "description": {
-        "label": "Card description",
-        "hint": "This is the text that will be in the top of your card",
-        "placeholder": "Lunch 9 times and the 10th is free!!!"
-    },
-    "quantity": {
-        "label": "Quantity",
-        "hint": "Choose how many stamps will be needed to get the prize",
-        "default": "Select a quantity",
-        "value_3": "3 stamps",
-        "value_6": "6 stamps",
-        "value_9": "9 stamps"
+        "label": "Description",
+        "hint": "The description of the location",
+        "placeholder": "Beautiful street"
     }
 }

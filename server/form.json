@@ -1,15 +1,8 @@
 {
   "fields": [
     {
-      "name": "password",
-      "type": "number",
-      "max-length": 4,
-      "min-length": 4,
-      "required": true
-    },
-    {
       "name": "locations",
-      "type": "field_group",
+      "type": "list",
       "fields": [
         {
           "name": "address",
