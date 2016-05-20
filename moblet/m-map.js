@@ -2,10 +2,6 @@ require('./m-map.scss');
 var path = require('path');
 var fs = require('fs');
 /* eslint no-undef: [0]*/
-/*
- * TODO: Inject <script src="http://maps.google.com/maps/api/js?key=AIzaSyDNzstSiq9llIK8b49En0dT-yFA5YpManU&amp;sensor=true"></script>
-in the app
- */
 angular.module("uMoblets")
   .directive('mMap', function() {
     function loadScript() {
@@ -51,7 +47,17 @@ angular.module("uMoblets")
           $scope.isLoading = true;
           $uFeedLoader.load($scope.moblet, 1, false)
             .then(function(data) {
-              $scope.map = data.map;
+              $scope.map = {
+                address: "Rua James Watt, 84 - 04576-050",
+                description: "Fab",
+                enable_control: "1",
+                imageHeight: 100,
+                imageUrl: "http://maps.google.com/maps/api/staticmap?center=-23.6118517,-46.6947361&zoom=17&size=100x100&maptype=mobile&markers=color:blue%7Clabel:M%7C-23.6118517,-46.6947361&sensor=true",
+                imageWidth: 100,
+                latitude: "-23.6118517",
+                longitude: "-46.6947361",
+                zoom: "17"
+              }
               $scope.isLoading = false;
               $scope.loadMap();
             });
