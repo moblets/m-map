@@ -7,11 +7,7 @@ angular.module("uMoblets")
     return {
       restrict: 'E',
       template: fs.readFileSync(path.join(__dirname, 'm-map.html'), 'utf8'),
-      link: function($scope) {
-        var s = document.createElement('script'); // use global document since Angular's $document is weak
-        s.src = 'http://maps.google.com/maps/api/js?key=AIzaSyDNzstSiq9llIK8b49En0dT-yFA5YpManU&amp;sensor=true';
-        document.body.appendChild(s);
-      },
+      link: function() {},
       controller: function($scope, $uPlatform, $uMoblet, $uFeedLoader) {
         $scope.load = function() {
           $scope.isLoading = true;
