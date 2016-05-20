@@ -1,4 +1,4 @@
-require('./m-fidelity-card.scss');
+require('./m-map.scss');
 var path = require('path');
 var fs = require('fs');
 
@@ -6,7 +6,7 @@ angular.module("uMoblets")
   .directive('uMap', function() {
     return {
       restrict: 'E',
-      template: fs.readFileSync(path.join(__dirname, 'u-map.html'), 'utf8'),
+      template: fs.readFileSync(path.join(__dirname, 'm-map.html'), 'utf8'),
       link: function() {},
       controller: function($scope, $uPlatform, $uMoblet, $uFeedLoader) {
         $scope.load = function() {
