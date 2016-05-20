@@ -1,8 +1,8 @@
 {
     "moblet": {
-        "label": "Cartão de Fidelidade",
-        "hint": "Crie um cartão de fidelidade para seus clientes",
-        "description": "Preencha os campos abaixo para criar o cartão de fidelidade"
+        "label": "Mapa",
+        "hint": "Crie um mapa com uma lista de lugares",
+        "description": "Preencha os campos abaixo para criar a página de mapa"
     },
     "password": {
         "label": "Senha",
