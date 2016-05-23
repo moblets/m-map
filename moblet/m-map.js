@@ -15,7 +15,7 @@ angular.module("uMoblets")
           $scope.isLoading = true;
           $uFeedLoader.load($scope.moblet, 1, false)
             .then(function(data) {
-              $scope.mapData = data.map;
+              $scope.mapData = data;
               $scope.isLoading = false;
               $scope.loadMap();
             });
