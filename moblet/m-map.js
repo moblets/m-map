@@ -79,7 +79,7 @@ angular.module("uMoblets")
                 marker = new google.maps.Marker({
                   position: new google.maps.LatLng(
                     locations[i].latitude, locations[i].longitude),
-                  map: map
+                  map: $scope.googleMap
                 });
 
                 google.maps.event.addListener(
