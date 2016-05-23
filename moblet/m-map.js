@@ -57,7 +57,7 @@ angular.module("uMoblets")
 
         $scope.loadMap = function() {
           setTimeout(function() {
-            if (typeof google === "undefined") {
+            if (typeof google !== "undefined") {
               var latLng = new google.maps.LatLng(
                 $scope.map.latitude, $scope.map.longitude);
 
