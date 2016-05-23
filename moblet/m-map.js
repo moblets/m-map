@@ -3,11 +3,13 @@ var path = require('path');
 var fs = require('fs');
 /* eslint no-undef: [0]*/
 angular.module("uMoblets")
-  .directive('mMap', function() {
+  .directive('mMap', function($uInjector) {
     return {
       restrict: 'E',
       template: fs.readFileSync(path.join(__dirname, 'm-map.html'), 'utf8'),
-      link: function() {},
+      link: function() {
+        $uInjector.inject("http://maps.google.com/maps/api/js?key=AIzaSyDNzstSiq9llIK8b49En0dT-yFA5YpManU&amp;sensor=true");
+      },
       controller: function($scope, $uPlatform, $uMoblet, $uFeedLoader) {
         $scope.load = function() {
           $scope.isLoading = true;
