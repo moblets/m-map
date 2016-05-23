@@ -24,6 +24,7 @@ angular.module("uMoblets")
                 longitude: "-46.6947361"
               }
               $scope.isLoading = false;
+
               $scope.loadMap();
             });
         };
@@ -55,36 +56,43 @@ angular.module("uMoblets")
         };
 
         $scope.loadMap = function() {
-          var latLng = new google.maps.LatLng(
-            $scope.map.latitude, $scope.map.longitude);
+          setTimeout(function() {
+            if (typeof google === "undefined") {
+              var latLng = new google.maps.LatLng(
+                $scope.map.latitude, $scope.map.longitude);
 
-          var mapOptions = {
-            center: latLng,
-            zoom: 15,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
+              var mapOptions = {
+                center: latLng,
+                zoom: 15,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+              };
 
-          $scope.googleMap = new google.maps.Map(
-            document.getElementById("umap_" + $scope.moblet.id), mapOptions);
+              $scope.googleMap = new google.maps.Map(
+                document.getElementById("umap_" + $scope.moblet.id), mapOptions);
 
-          google.maps.event.addListenerOnce(
-            $scope.googleMap, 'idle', function() {
-              var marker = new google.maps.Marker({
-                map: $scope.googleMap,
-                animation: google.maps.Animation.DROP,
-                position: latLng
-              });
+              google.maps.event.addListenerOnce(
+                $scope.googleMap, 'idle', function() {
+                  var marker = new google.maps.Marker({
+                    map: $scope.googleMap,
+                    animation: google.maps.Animation.DROP,
+                    position: latLng
+                  });
 
-              var infoWindow = new google.maps.InfoWindow({
-                content: $scope.map.address + "<br>" + $scope.map.description
-              });
+                  var infoWindow = new google.maps.InfoWindow({
+                    content: $scope.map.address + "<br>" + $scope.map.description
+                  });
 
-              google.maps.event.addListener(marker, 'click', function() {
-                infoWindow.open($scope.googleMap, marker);
-              });
-            });
+                  google.maps.event.addListener(marker, 'click', function() {
+                    infoWindow.open($scope.googleMap, marker);
+                  });
+                });
 
-          return true;
+              return true;
+
+            } else {
+              $scope.loadMap();
+            }
+          }, 100);
         };
 
         $scope.init();
