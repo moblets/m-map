@@ -23,7 +23,7 @@ angular.module("uMoblets")
               //   latitude: "-23.6118517",
               //   longitude: "-46.6947361"
               // }
-              console.log($scope.map);
+              console.log('.map data', $scope.map);
               $scope.isLoading = false;
 
               $scope.loadMap();
