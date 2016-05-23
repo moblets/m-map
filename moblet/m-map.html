@@ -3,9 +3,9 @@
     <div id="m-map-{{moblet.id}}" ng-style="mapStyle" u-make-frame-min-size frame-discount="100" ></div>
     <div class="list" ng-repeat="(key, location) in mapData.locations">
         <div class="item" href="#" style="height: 100px;">
-          <h2>{{location[key].title}}</h2>
-          <p>{{location[key].description}}</p>
-          <p>{{location[key].address}}</p>
+          <h2>{{location.title}}</h2>
+          <p>{{location.description}}</p>
+          <p>{{location.address}}</p>
         </div>
     </div>
 </u-moblet>
