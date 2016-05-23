@@ -15,14 +15,15 @@ angular.module("uMoblets")
           $scope.isLoading = true;
           $uFeedLoader.load($scope.moblet, 1, false)
             .then(function(data) {
-              // $scope.map = data.map;
-              $scope.map = {
-                address: "Rua James Watt, 84 - 04576-050",
-                title: "Fab",
-                description: "FabApp :)",
-                latitude: "-23.6118517",
-                longitude: "-46.6947361"
-              }
+              $scope.map = data.map;
+              // $scope.map = {
+              //   address: "Rua James Watt, 84 - 04576-050",
+              //   title: "Fab",
+              //   description: "FabApp :)",
+              //   latitude: "-23.6118517",
+              //   longitude: "-46.6947361"
+              // }
+              console.log($scope.map);
               $scope.isLoading = false;
 
               $scope.loadMap();
