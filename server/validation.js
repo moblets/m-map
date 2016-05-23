@@ -3,6 +3,7 @@
 // var http = require('http');
 
 module.exports = {
+  moblet: function(data) {},
   /**
    * Validate a given address as a valid Google Maps address
    * @param  {String} address The address
