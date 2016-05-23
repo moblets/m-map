@@ -87,8 +87,8 @@ angular.module("uMoblets")
                   'click',
                   (function(marker, i) {
                     return function() {
-                      infowindow.setContent(locations[i].title);
-                      infowindow.open($scope.googleMap, marker);
+                      infoWindow.setContent(locations[i].title);
+                      infoWindow.open($scope.googleMap, marker);
                     }
                   })(marker, i));
               }
