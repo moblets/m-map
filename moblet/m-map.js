@@ -15,7 +15,7 @@ angular.module("uMoblets")
           $scope.isLoading = true;
           $uFeedLoader.load($scope.moblet, 1, false)
             .then(function(data) {
-              $scope.map = data.map;
+              $scope.map = data;
               // $scope.map = {
               //   address: "Rua James Watt, 84 - 04576-050",
               //   title: "Fab",
@@ -23,7 +23,7 @@ angular.module("uMoblets")
               //   latitude: "-23.6118517",
               //   longitude: "-46.6947361"
               // }
-              console.log('.map data', $scope.map);
+              console.log('.map data', $scope);
               $scope.isLoading = false;
 
               $scope.loadMap();
