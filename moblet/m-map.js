@@ -90,7 +90,7 @@ angular.module("uMoblets")
                       infoWindow.setContent(
                         locations[i].title +
                         "<br>" +
-                        $scope.mapData.description);
+                        locations[i].description);
                       infoWindow.open($scope.googleMap, marker);
                     }
                   })(marker, i));
