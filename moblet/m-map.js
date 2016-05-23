@@ -15,17 +15,8 @@ angular.module("uMoblets")
           $scope.isLoading = true;
           $uFeedLoader.load($scope.moblet, 1, false)
             .then(function(data) {
-              $scope.map = data;
-              // $scope.map = {
-              //   address: "Rua James Watt, 84 - 04576-050",
-              //   title: "Fab",
-              //   description: "FabApp :)",
-              //   latitude: "-23.6118517",
-              //   longitude: "-46.6947361"
-              // }
-              console.log('.map data', $scope);
+              $scope.mapData = data.map;
               $scope.isLoading = false;
-
               $scope.loadMap();
             });
         };
@@ -58,40 +49,68 @@ angular.module("uMoblets")
 
         $scope.loadMap = function() {
           setTimeout(function() {
-            if (typeof google !== "undefined") {
-              var latLng = new google.maps.LatLng(
-                $scope.map.latitude, $scope.map.longitude);
+            // Wait until 'maps api' has been injected
+            if (typeof google === "undefined") {
+              $scope.loadMap();
+            } else {
+              var locations = $scope.mapData.locations;
+              var options = $scope.mapData.options;
 
               var mapOptions = {
-                center: latLng,
-                zoom: 15,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
+                zoom: options.zoom,
+                center: new google.maps.LatLng(
+                  options.centerLatitude,
+                  options.centerLongitude
+                ),
+                mapTypeId: google.maps.MapTypeId[
+                  options.mapTypeId
+                ]
               };
 
               $scope.googleMap = new google.maps.Map(
-                document.getElementById("umap_" + $scope.moblet.id), mapOptions);
+                document.getElementById("m-map-" + $scope.moblet.id),
+                mapOptions);
 
-              google.maps.event.addListenerOnce(
-                $scope.googleMap, 'idle', function() {
-                  var marker = new google.maps.Marker({
-                    map: $scope.googleMap,
-                    animation: google.maps.Animation.DROP,
-                    position: latLng
-                  });
+              var infoWindow = new google.maps.InfoWindow();
+              var marker;
+              var i;
 
-                  var infoWindow = new google.maps.InfoWindow({
-                    content: $scope.map.address + "<br>" + $scope.map.description
-                  });
-
-                  google.maps.event.addListener(marker, 'click', function() {
-                    infoWindow.open($scope.googleMap, marker);
-                  });
+              for (i = 0; i < locations.length; i++) {
+                marker = new google.maps.Marker({
+                  position: new google.maps.LatLng(
+                    locations[i].latitude, locations[i].longitude),
+                  map: map
                 });
 
-              return true;
+                google.maps.event.addListener(
+                  marker,
+                  'click',
+                  (function(marker, i) {
+                    return function() {
+                      infowindow.setContent(locations[i].title);
+                      infowindow.open(map, marker);
+                    }
+                  })(marker, i));
+              }
 
-            } else {
-              $scope.loadMap();
+              // google.maps.event.addListenerOnce(
+              //   $scope.googleMap, 'idle', function() {
+              //     var marker = new google.maps.Marker({
+              //       map: $scope.googleMap,
+              //       animation: google.maps.Animation.DROP,
+              //       position: latLng
+              //     });
+              //
+              //     var infoWindow = new google.maps.InfoWindow({
+              //       content: $scope.mapData.address + "<br>" + $scope.mapData.description
+              //     });
+              //
+              //     google.maps.event.addListener(marker, 'click', function() {
+              //       infoWindow.open($scope.googleMap, marker);
+              //     });
+              //   });
+
+              return true;
             }
           }, 100);
         };
