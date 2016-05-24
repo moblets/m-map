@@ -1,12 +1,9 @@
 m-map {
-  .map , .address, .animate-if {
+  .map , .address, .animate-if, .animate-if.ng-enter, .animate-if.ng-leave {
     transition: all 5s ease-in-out;
   }
   .animate-if {
     background-color: blue;
-  }
-  .animate-if.ng-enter, .animate-if.ng-leave {
-    transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 5s;
   }
 
   .animate-if.ng-enter, .animate-if.ng-leave.ng-leave-active {
