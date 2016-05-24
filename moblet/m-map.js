@@ -27,26 +27,6 @@ angular.module("uMoblets")
           $scope.load();
         };
 
-        $scope.computeMapStyle = function() {
-          var tabs = document.querySelectorAll(".with-tabs").length > 0;
-          var banner = document.querySelectorAll(".with-banner").length > 0;
-
-          var descount = 44;
-          if ($uPlatform.isIOS() && $uPlatform.isWebView()) {
-            descount += 20;
-          }
-          if (banner) {
-            descount += 53;
-          }
-          if (tabs) {
-            descount += 53;
-          }
-
-          return {
-            height: (window.innerHeight - descount - 100) + 'px'
-          };
-        };
-
         $scope.loadMap = function() {
           setTimeout(function() {
             // Wait until 'maps api' has been injected
@@ -55,13 +35,21 @@ angular.module("uMoblets")
             } else {
               var mapData = $scope.mapData;
               var locations = mapData.locations;
-              var center = getCenter(locations);
+
+              var longitude = 0;
+              var latitude = 0;
+              for (var i = 0; i < locations.length; i++) {
+                longitude += locations[i].longitude;
+                latitude += locations[i].latitude;
+              }
+              latitude = latitude / locations.length;
+              longitude = longitude / locations.length;
 
               var mapOptions = {
                 zoom: mapData.zoom,
                 center: new google.maps.LatLng(
-                  options.center.latitude,
-                  options.center.longitude
+                  latitude,
+                  longitude
                 ),
                 mapTypeId: google.maps.MapTypeId[
                   mapData.mapTypeId
@@ -96,18 +84,6 @@ angular.module("uMoblets")
                     }
                   })(marker, i));
               }
-
-              var getCenter = function(locations) {
-                var longitude = 0;
-                var latitude = 0;
-                for (var i = 0; i < locations.length; i++) {
-                  longitude += locations[i].longitude;
-                  latitude += locations[i].latitude;
-                }
-                latitude = latitude / locations.length;
-                longitude = longitude / locations.length;
-              }
-
               return {
                 latitude: latitude,
                 longitude: longitude
