@@ -26,7 +26,7 @@ angular.module("uMoblets")
               $scope.isLoading = false;
               $scope.mapHeight = $scope.computeFactorHeight(50);
               $scope.listHeight = $scope.computeFactorHeight(50);
-              $scope.listMinifiedHeight = $scope.computeFactorHeight(10);
+              $scope.listMinifiedHeight = $scope.computeFactorHeight(0);
               $scope.loadMap();
             });
         };
@@ -34,12 +34,14 @@ angular.module("uMoblets")
         $scope.zoomList = function() {
           $scope.mapHeight = $scope.computeFactorHeight(10);
           $scope.listHeight = $scope.computeFactorHeight(90);
+          $scope.listMinifiedHeight = $scope.computeFactorHeight(0);
           $scope.listMinified = false;
         };
 
         $scope.zoomMap = function() {
           $scope.mapHeight = $scope.computeFactorHeight(90);
           $scope.listHeight = $scope.computeFactorHeight(10);
+          $scope.listMinifiedHeight = $scope.computeFactorHeight(10);
           $scope.listMinified = true;
         };
 
