@@ -11,14 +11,21 @@ angular.module("uMoblets")
         $uInjector.inject("http://maps.google.com/maps/api/js" +
           "?key=AIzaSyDNzstSiq9llIK8b49En0dT-yFA5YpManU&amp;sensor=true");
       },
-      controller: function($element, $scope, $uPlatform, $uMoblet, $uFeedLoader) {
+      controller: function(
+        $element,
+        $scope,
+        $uPlatform,
+        $uMoblet,
+        $uFeedLoader
+      ) {
         $scope.load = function() {
           $scope.isLoading = true;
           $uFeedLoader.load($scope.moblet, 1, false)
             .then(function(data) {
               $scope.mapData = data;
               $scope.isLoading = false;
-              $scope.mapHeight = $scope.listHeight = $scope.computeFactorHeight(50);
+              $scope.mapHeight = $scope.computeFactorHeight(50);
+              $scope.listHeight = $scope.computeFactorHeight(50);
               $scop.listMinifiedHeight = $scope.computeFactorHeight(10);
               $scope.loadMap();
             });
@@ -89,12 +96,11 @@ angular.module("uMoblets")
 
               var infoWindow = new google.maps.InfoWindow();
               var marker;
-              var i;
 
-              for (i = 0; i < locations.length; i++) {
+              for (var j = 0; j < locations.length; j++) {
                 marker = new google.maps.Marker({
                   position: new google.maps.LatLng(
-                    locations[i].latitude, locations[i].longitude),
+                    locations[j].latitude, locations[j].longitude),
                   map: $scope.googleMap
                 });
 
@@ -108,8 +114,8 @@ angular.module("uMoblets")
                         "<br>" +
                         locations[i].description);
                       infoWindow.open($scope.googleMap, marker);
-                    }
-                  })(marker, i));
+                    };
+                  })(marker, j));
               }
               return {
                 latitude: latitude,
