@@ -46,7 +46,7 @@ angular.module("uMoblets")
           $scope.listHeight = $scope.computeFactorHeight(10);
           $scope.listMinifiedHeight = $scope.computeFactorHeight(10);
           $scope.listMinified = true;
-        // google.maps.event.trigger(map, 'resize');
+          google.maps.event.trigger(map, 'resize');
         };
 
         $scope.init = function() {
@@ -94,6 +94,8 @@ angular.module("uMoblets")
               $scope.loadMap();
             } else {
               var mapData = $scope.mapData;
+              var locations = $scope.mapData.locations;
+
               var mapOptions = {
                 zoom: mapData.zoom,
                 mapTypeControl: false,
