@@ -2,7 +2,7 @@
 <u-moblet is-loading="isLoading" init="init">
     <div id="wraper" u-make-frame-min-size >
     <div id="m-map-{{moblet.id}}" class="map" ng-click="zoomMap()" ng-style="{'height':mapHeight}"></div>
-    <ion-scroll class="address" direction="y" ng-style="{'height':listHeight}">
+    <ion-scroll class="address" direction="y" ng-click="zoomList()" ng-style="{'height':listHeight}">
       <div class="list">
           <div class="item" href="#" style="height: 100px;" ng-repeat="(key, location) in mapData.locations">
             <h2>{{location.title}}</h2>

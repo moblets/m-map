@@ -22,9 +22,14 @@ angular.module("uMoblets")
             });
         };
 
-        $scope.zoomMap = function() {
+        $scope.zoomList = function() {
           $scope.mapHeight = $scope.computeFactorHeight(10);
           $scope.listHeight = $scope.computeFactorHeight(90);
+        };
+
+        $scope.zoomMap = function() {
+          $scope.mapHeight = $scope.computeFactorHeight(90);
+          $scope.listHeight = $scope.computeFactorHeight(10);
         };
 
         $scope.init = function() {
