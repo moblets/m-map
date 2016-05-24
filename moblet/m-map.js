@@ -45,6 +45,9 @@ angular.module("uMoblets")
               latitude = latitude / locations.length;
               longitude = longitude / locations.length;
 
+              console.log('latitude', latitude);
+              console.log('longitude', longitude);
+
               var mapOptions = {
                 zoom: mapData.zoom,
                 center: new google.maps.LatLng(
