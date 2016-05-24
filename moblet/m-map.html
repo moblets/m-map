@@ -1,11 +1,15 @@
 
 <u-moblet is-loading="isLoading" init="init">
-    <div id="m-map-{{moblet.id}}" class="map" u-make-frame-min-size frame-discount="220" ></div>
-    <div class="list">
-        <div class="item" href="#" style="height: 100px;" ng-repeat="(key, location) in mapData.locations">
-          <h2>{{location.title}}</h2>
-          <p>{{location.description}}</p>
-          <p>{{location.address}}</p>
-        </div>
+    <div id="wraper" u-make-frame-min-size >
+    <div id="m-map-{{moblet.id}}" class="map"></div>
+    <ion-scroll direction="y" >
+      <div class="list">
+          <div class="item" href="#" style="height: 100px;" ng-repeat="(key, location) in mapData.locations">
+            <h2>{{location.title}}</h2>
+            <p>{{location.description}}</p>
+            <p>{{location.address}}</p>
+          </div>
+      </div>
+    </ion-scroll>
     </div>
 </u-moblet>
