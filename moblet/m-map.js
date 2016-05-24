@@ -10,7 +10,7 @@ angular.module("uMoblets")
       link: function() {
         $uInjector.inject("http://maps.google.com/maps/api/js?key=AIzaSyDNzstSiq9llIK8b49En0dT-yFA5YpManU&amp;sensor=true");
       },
-      controller: function($scope, $uPlatform, $uMoblet, $uFeedLoader) {
+      controller: function($element, scope, $uPlatform, $uMoblet, $uFeedLoader) {
         $scope.load = function() {
           $scope.isLoading = true;
           $uFeedLoader.load($scope.moblet, 1, false)
@@ -25,6 +25,11 @@ angular.module("uMoblets")
           $scope.isLoading = false;
           $scope.moblet = $uMoblet.load();
           $scope.load();
+          $scope.computeStyle();
+        };
+
+        $scope.computeStyle = function() {
+          console.log($element);
         };
 
         $scope.loadMap = function() {
