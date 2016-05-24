@@ -47,7 +47,7 @@ angular.module("uMoblets")
           $scope.listMinifiedHeight = $scope.computeFactorHeight(10);
           $scope.listMinified = true;
           $scope.googleMap.addListener('bounds_changed', function() {
-            console.log('bounds_changed');
+            console.log('tilesloaded');
             $scope.googleMap.panTo(new google.maps.LatLng(
               $scope.mapData.centerLatitude,
               $scope.mapData.centerLongitude
