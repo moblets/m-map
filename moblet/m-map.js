@@ -42,8 +42,8 @@ angular.module("uMoblets")
 
               for (var i = 0; i < locations.length; i++) {
                 console.log('locations[i]', locations[i]);
-                longitude += locations[i].longitude;
-                latitude += locations[i].latitude;
+                longitude += Number(locations[i].longitude);
+                latitude += Number(locations[i].latitude);
               }
               latitude = latitude / locations.length;
               longitude = longitude / locations.length;
