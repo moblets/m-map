@@ -1,6 +1,6 @@
 m-map {
   .map , .address, .animate-if, .animate-if.ng-enter, .animate-if.ng-leave {
-    transition: all 5s ease-in-out;
+    transition: all 0.5s ease-in-out;
   }
   .animate-if {
     background-color: blue;
