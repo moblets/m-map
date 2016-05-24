@@ -85,6 +85,11 @@ angular.module("uMoblets")
 
               var mapOptions = {
                 zoom: mapData.zoom,
+                mapTypeControl: false,
+                streetViewControl: false,
+                panControl: false,
+                rotateControl: false,
+                zoomControl: false,
                 center: new google.maps.LatLng(
                   latitude,
                   longitude
