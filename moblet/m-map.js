@@ -53,17 +53,18 @@ angular.module("uMoblets")
             if (typeof google === "undefined") {
               $scope.loadMap();
             } else {
-              var locations = $scope.mapData.locations;
-              var options = $scope.mapData.options;
+              var mapData = $scope.mapData;
+              var locations = mapData.locations;
+              var center = getCenter(locations);
 
               var mapOptions = {
-                zoom: options.zoom,
+                zoom: mapData.zoom,
                 center: new google.maps.LatLng(
-                  options.centerLatitude,
-                  options.centerLongitude
+                  options.center.latitude,
+                  options.center.longitude
                 ),
                 mapTypeId: google.maps.MapTypeId[
-                  options.mapTypeId
+                  mapData.mapTypeId
                 ]
               };
 
@@ -96,24 +97,21 @@ angular.module("uMoblets")
                   })(marker, i));
               }
 
-              // google.maps.event.addListenerOnce(
-              //   $scope.googleMap, 'idle', function() {
-              //     var marker = new google.maps.Marker({
-              //       map: $scope.googleMap,
-              //       animation: google.maps.Animation.DROP,
-              //       position: latLng
-              //     });
-              //
-              //     var infoWindow = new google.maps.InfoWindow({
-              //       content: $scope.mapData.address + "<br>" + $scope.mapData.description
-              //     });
-              //
-              //     google.maps.event.addListener(marker, 'click', function() {
-              //       infoWindow.open($scope.googleMap, marker);
-              //     });
-              //   });
+              var getCenter = function(locations) {
+                var longitude = 0;
+                var latitude = 0;
+                for (var i = 0; i < locations.length; i++) {
+                  longitude += locations[i].longitude;
+                  latitude += locations[i].latitude;
+                }
+                latitude = latitude / locations.length;
+                longitude = longitude / locations.length;
+              }
 
-              return true;
+              return {
+                latitude: latitude,
+                longitude: longitude
+              };
             }
           }, 100);
         };

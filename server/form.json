@@ -1,22 +1,40 @@
 {
   "fields": [
     {
+      "name": "zoom",
+      "type": "number",
+      "required": true,
+      "less-than-or-equal": 0,
+      "more-than-or-equal": 19
+    },
+    {
+      "name": "mapTypeId",
+      "required": true,
+      "type": "select",
+        "values": {
+          "ROADMAP": "roadmap",
+          "SATELLITE": "satelite",
+          "HYBRID": "hybrid",
+          "TERRAIN": "terrain"
+      }
+    },
+    {
       "name": "locations",
       "type": "list",
       "fields": [
         {
           "name": "address",
           "type": "text",
+          "required": true,
           "min-length": 3,
-          "max-length": 255,
-          "required": true
+          "max-length": 255
         },
         {
           "name": "title",
           "type": "text",
+          "required": true,
           "min-length": 3,
-          "max-length": 255,
-          "required": true
+          "max-length": 255
         },
         {
           "name": "description",
