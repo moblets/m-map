@@ -40,7 +40,7 @@ angular.module("uMoblets")
               $scope.loadMap();
             } else {
 
-              $scope.mapHeight = $scope.listHeight = $scope.computeFactorHeight(50);
+              $scope.mapHeight = $scope.listHeight = $scope.computeFactorHeight(50) + "px";
               var mapData = $scope.mapData;
               var locations = mapData.locations;
 
