@@ -8,7 +8,8 @@ angular.module("uMoblets")
       restrict: 'E',
       template: fs.readFileSync(path.join(__dirname, 'm-map.html'), 'utf8'),
       link: function() {
-        $uInjector.inject("http://maps.google.com/maps/api/js?key=AIzaSyDNzstSiq9llIK8b49En0dT-yFA5YpManU&amp;sensor=true");
+        $uInjector.inject("http://maps.google.com/maps/api/js" +
+          "?key=AIzaSyDNzstSiq9llIK8b49En0dT-yFA5YpManU&amp;sensor=true");
       },
       controller: function($element, $scope, $uPlatform, $uMoblet, $uFeedLoader) {
         $scope.load = function() {
@@ -25,11 +26,13 @@ angular.module("uMoblets")
         $scope.zoomList = function() {
           $scope.mapHeight = $scope.computeFactorHeight(10);
           $scope.listHeight = $scope.computeFactorHeight(90);
+          $scope.listMinified = false;
         };
 
         $scope.zoomMap = function() {
           $scope.mapHeight = $scope.computeFactorHeight(90);
           $scope.listHeight = $scope.computeFactorHeight(10);
+          $scope.listMinified = true;
         };
 
         $scope.init = function() {
