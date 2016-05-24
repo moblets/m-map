@@ -10,7 +10,7 @@ angular.module("uMoblets")
       link: function() {
         $uInjector.inject("http://maps.google.com/maps/api/js?key=AIzaSyDNzstSiq9llIK8b49En0dT-yFA5YpManU&amp;sensor=true");
       },
-      controller: function($element, scope, $uPlatform, $uMoblet, $uFeedLoader) {
+      controller: function($element, $scope, $uPlatform, $uMoblet, $uFeedLoader) {
         $scope.load = function() {
           $scope.isLoading = true;
           $uFeedLoader.load($scope.moblet, 1, false)
@@ -50,8 +50,8 @@ angular.module("uMoblets")
                 longitude += Number(locations[i].longitude);
                 latitude += Number(locations[i].latitude);
               }
-              latitude = latitude / locations.length;
-              longitude = longitude / locations.length;
+              latitude /= locations.length;
+              longitude /= locations.length;
 
               console.log('latitude', latitude);
               console.log('longitude', longitude);
