@@ -27,7 +27,7 @@ angular.module("uMoblets")
           $scope.load();
         };
 
-        $scope.computeFactorHeight = function() {
+        $scope.computeFactorHeight = function(factor) {
           var element = document.querySelector("m-map #wraper");
           var h = Number(element.style["min-height"].replace("px", ""));
           return h / (100 / factor);
