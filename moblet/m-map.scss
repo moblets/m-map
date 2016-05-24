@@ -1,5 +1,5 @@
 m-map {
-  .map , .address, .animate-if, .animate-if.ng-enter, .animate-if.ng-leave {
+  .map , .address, .animate-if {
     transition: all 0.5s ease-in-out;
   }
   .animate-if {
@@ -7,7 +7,6 @@ m-map {
   }
 
   .animate-if.ng-enter, .animate-if.ng-leave.ng-leave-active {
-    height: 0px;
     opacity:0;
   }
 
