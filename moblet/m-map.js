@@ -45,6 +45,7 @@ angular.module("uMoblets")
           $scope.listHeight = $scope.computeFactorHeight(10);
           $scope.listMinifiedHeight = $scope.computeFactorHeight(10);
           $scope.listMinified = true;
+          google.maps.event.trigger(map, 'resize');
         };
 
         $scope.init = function() {
@@ -68,17 +69,28 @@ angular.module("uMoblets")
               var mapData = $scope.mapData;
               var locations = mapData.locations;
 
-              var longitude = 0;
-              var latitude = 0;
-              console.log('locations', locations);
+              var longitudeMin = Number(locations[0].longitude);
+              var latitudeMin = Number(locations[0].latitude);
+              var longitudeMax = Number(locations[0].longitude);
+              var latitudeMax = Number(locations[0].latitude);
 
               for (var i = 0; i < locations.length; i++) {
                 console.log('locations[i]', locations[i]);
-                longitude += Number(locations[i].longitude);
-                latitude += Number(locations[i].latitude);
+                if (Number(locations[i].longitude) < longitudeMin) {
+                  longitudeMin = Number(locations[i].longitude);
+                }
+                if (Number(locations[i].longitude) > longitudeMax) {
+                  longitudeMax = Number(locations[i].longitude);
+                }
+                if (Number(locations[i].latitude) < latitudeMin) {
+                  latitudeMin = Number(locations[i].latitude);
+                }
+                if (Number(locations[i].latitude) > latitudeMax) {
+                  latitudeMax = Number(locations[i].latitude);
+                }
               }
-              latitude /= locations.length;
-              longitude /= locations.length;
+              var latitude = (longitudeMax + longitudeMin) / 2;
+              var longitude = (latitudeMax + latitudeMin) / 2;
 
               console.log('latitude', latitude);
               console.log('longitude', longitude);
