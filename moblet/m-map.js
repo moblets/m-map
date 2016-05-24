@@ -51,7 +51,7 @@ angular.module("uMoblets")
             console.log('resize');
             console.log($scope.googleMap);
           // $scope.googleMap.setMap($scope.googleMap.getMap());
-          }, 0.6);
+          }, 10);
         };
 
         $scope.init = function() {
