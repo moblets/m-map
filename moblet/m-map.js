@@ -25,11 +25,12 @@ angular.module("uMoblets")
           $scope.isLoading = false;
           $scope.moblet = $uMoblet.load();
           $scope.load();
-          $scope.computeStyle();
         };
 
-        $scope.computeStyle = function() {
-          console.log($element);
+        $scope.computeFactorHeight = function() {
+          var element = document.querySelector("m-map #wraper");
+          var h = Number(element.style["min-height"].replace("px", ""));
+          return h / (100 / factor);
         };
 
         $scope.loadMap = function() {
@@ -38,6 +39,8 @@ angular.module("uMoblets")
             if (typeof google === "undefined") {
               $scope.loadMap();
             } else {
+
+              $scope.mapHeight = $scope.listHeight = $scope.computeFactorHeight(50);
               var mapData = $scope.mapData;
               var locations = mapData.locations;
 
