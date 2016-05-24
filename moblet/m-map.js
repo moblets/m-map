@@ -17,6 +17,7 @@ angular.module("uMoblets")
             .then(function(data) {
               $scope.mapData = data;
               $scope.isLoading = false;
+              $scope.mapHeight = $scope.listHeight = $scope.computeFactorHeight(50) + "px";
               $scope.loadMap();
             });
         };
@@ -39,8 +40,6 @@ angular.module("uMoblets")
             if (typeof google === "undefined") {
               $scope.loadMap();
             } else {
-
-              $scope.mapHeight = $scope.listHeight = $scope.computeFactorHeight(50) + "px";
               var mapData = $scope.mapData;
               var locations = mapData.locations;
 
