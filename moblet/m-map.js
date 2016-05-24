@@ -29,6 +29,7 @@ angular.module("uMoblets")
               $scope.listHeight = $scope.computeFactorHeight(50);
               $scope.listMinifiedHeight = $scope.computeFactorHeight(0);
               $scope.listMinifiedText = $filter('translate')("show_locations");
+              $scope.findCenter();
               $scope.loadMap();
             });
         };
@@ -60,6 +61,32 @@ angular.module("uMoblets")
           return h / (100 / factor) + "px";
         };
 
+        $scope.findCenter = function() {
+          var locations = $scope.mapData.locations;
+
+          var longitudeMin = Number(locations[0].longitude);
+          var latitudeMin = Number(locations[0].latitude);
+          var longitudeMax = Number(locations[0].longitude);
+          var latitudeMax = Number(locations[0].latitude);
+
+          for (var i = 0; i < locations.length; i++) {
+            if (Number(locations[i].longitude) < longitudeMin) {
+              longitudeMin = Number(locations[i].longitude);
+            }
+            if (Number(locations[i].longitude) > longitudeMax) {
+              longitudeMax = Number(locations[i].longitude);
+            }
+            if (Number(locations[i].latitude) < latitudeMin) {
+              latitudeMin = Number(locations[i].latitude);
+            }
+            if (Number(locations[i].latitude) > latitudeMax) {
+              latitudeMax = Number(locations[i].latitude);
+            }
+          }
+          $scope.mapData.centerLongitude = (longitudeMax + longitudeMin) / 2;
+          $scope.mapData.centerLatitude = (latitudeMax + latitudeMin) / 2;
+        };
+
         $scope.loadMap = function() {
           setTimeout(function() {
             // Wait until 'maps api' has been injected
@@ -67,34 +94,6 @@ angular.module("uMoblets")
               $scope.loadMap();
             } else {
               var mapData = $scope.mapData;
-              var locations = mapData.locations;
-
-              var longitudeMin = Number(locations[0].longitude);
-              var latitudeMin = Number(locations[0].latitude);
-              var longitudeMax = Number(locations[0].longitude);
-              var latitudeMax = Number(locations[0].latitude);
-
-              for (var i = 0; i < locations.length; i++) {
-                console.log('locations[i]', locations[i]);
-                if (Number(locations[i].longitude) < longitudeMin) {
-                  longitudeMin = Number(locations[i].longitude);
-                }
-                if (Number(locations[i].longitude) > longitudeMax) {
-                  longitudeMax = Number(locations[i].longitude);
-                }
-                if (Number(locations[i].latitude) < latitudeMin) {
-                  latitudeMin = Number(locations[i].latitude);
-                }
-                if (Number(locations[i].latitude) > latitudeMax) {
-                  latitudeMax = Number(locations[i].latitude);
-                }
-              }
-              var latitude = (longitudeMax + longitudeMin) / 2;
-              var longitude = (latitudeMax + latitudeMin) / 2;
-
-              console.log('latitude', latitude);
-              console.log('longitude', longitude);
-
               var mapOptions = {
                 zoom: mapData.zoom,
                 mapTypeControl: false,
@@ -103,8 +102,8 @@ angular.module("uMoblets")
                 rotateControl: false,
                 zoomControl: false,
                 center: new google.maps.LatLng(
-                  latitude,
-                  longitude
+                  mapData.centerLatitude,
+                  mapData.centerLongitude
                 ),
                 mapTypeId: google.maps.MapTypeId[
                   mapData.mapTypeId
