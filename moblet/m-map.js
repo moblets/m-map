@@ -16,7 +16,8 @@ angular.module("uMoblets")
         $scope,
         $uPlatform,
         $uMoblet,
-        $uFeedLoader
+        $uFeedLoader,
+        $filter
       ) {
         $scope.load = function() {
           $scope.isLoading = true;
@@ -27,6 +28,7 @@ angular.module("uMoblets")
               $scope.mapHeight = $scope.computeFactorHeight(50);
               $scope.listHeight = $scope.computeFactorHeight(50);
               $scope.listMinifiedHeight = $scope.computeFactorHeight(0);
+              $scope.listMinifiedText = $filter('translate')("show_locations");
               $scope.loadMap();
             });
         };
