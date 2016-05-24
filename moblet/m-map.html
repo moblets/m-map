@@ -3,7 +3,7 @@
     <div id="wraper" u-make-frame-min-size >
     <div id="m-map-{{moblet.id}}" class="map" ng-click="zoomMap()" ng-style="{'height':mapHeight}"></div>
     <ion-scroll class="address" direction="y" ng-style="{'height':listHeight}" ng-click="zoomList()">
-      <div id="open-list" class="animate-if" ng-if="listMinified === true" ng-style="{'height':listHeight}">
+      <div class="animate-if" ng-if="listMinified === true" ng-style="{'height':listHeight}">
         OPEN THE LIST
       </div>
       <div class="list">
