@@ -2,8 +2,8 @@
 <u-moblet is-loading="isLoading" init="init">
     <div id="wraper" u-make-frame-min-size >
     <div id="m-map-{{moblet.id}}" class="map" ng-click="zoomMap()" ng-style="{'height':mapHeight}"></div>
-    <ion-scroll class="address" direction="y" ng-style="{'height':listHeight}">
-      <div id="open-list" ng-if="list-minified === true" ng-click="zoomList()">
+    <ion-scroll class="address" direction="y" ng-style="{'height':listHeight}" ng-click="zoomList()">
+      <div id="open-list" ng-if="list-minified === true">
         OPEN THE LIST
       </div>
       <div class="list">
