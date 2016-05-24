@@ -46,7 +46,10 @@ angular.module("uMoblets")
           $scope.listHeight = $scope.computeFactorHeight(10);
           $scope.listMinifiedHeight = $scope.computeFactorHeight(10);
           $scope.listMinified = true;
-          $scope.loadMap();
+          $scope.googleMap.addListener('tilesloaded', function() {
+            console.log('tilesloaded');
+            $scope.googleMap.setMap(scope.googleMap.getMap());
+          }, 0.6);
         };
 
         $scope.init = function() {
