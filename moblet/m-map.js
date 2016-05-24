@@ -107,12 +107,12 @@ angular.module("uMoblets")
                 google.maps.event.addListener(
                   marker,
                   'click',
-                  (function(marker, i) {
+                  (function(marker, j) {
                     return function() {
                       infoWindow.setContent(
-                        locations[i].title +
+                        locations[j].title +
                         "<br>" +
-                        locations[i].description);
+                        locations[j].description);
                       infoWindow.open($scope.googleMap, marker);
                     };
                   })(marker, j));
