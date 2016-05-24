@@ -1,8 +1,8 @@
 
 <u-moblet is-loading="isLoading" init="init">
-    <div id="m-map-{{moblet.id}}" class="map" u-make-frame-min-size frame-discount="100" ></div>
-    <div class="list" ng-repeat="(key, location) in mapData.locations">
-        <div class="item" href="#" style="height: 100px;">
+    <div id="m-map-{{moblet.id}}" class="map"></div>
+    <div class="list">
+        <div class="item" href="#" style="height: 100px;" ng-repeat="(key, location) in mapData.locations">
           <h2>{{location.title}}</h2>
           <p>{{location.description}}</p>
           <p>{{location.address}}</p>
