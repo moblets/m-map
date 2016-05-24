@@ -19,6 +19,7 @@ angular.module("uMoblets")
               $scope.mapData = data;
               $scope.isLoading = false;
               $scope.mapHeight = $scope.listHeight = $scope.computeFactorHeight(50);
+              $scop.listMinifiedHeight = $scope.computeFactorHeight(10);
               $scope.loadMap();
             });
         };
