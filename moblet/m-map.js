@@ -50,6 +50,7 @@ angular.module("uMoblets")
           $scope.googleMap.addListener('resize', function() {
             console.log('resize');
             console.log($scope.googleMap);
+            google.maps.event.trigger($scope.googleMap, 'resize');
           // $scope.googleMap.setMap($scope.googleMap.getMap());
           }, 0.6);
         };
