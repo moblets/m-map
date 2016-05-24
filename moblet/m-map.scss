@@ -1,8 +1,5 @@
 m-map {
-  .map {
-    height: 50%;
-  }
-  .list{
-    height: 50%;
+  .map , .address {
+    transition: all 0.5s ease-in-out;
   }
 }

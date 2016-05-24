@@ -17,9 +17,14 @@ angular.module("uMoblets")
             .then(function(data) {
               $scope.mapData = data;
               $scope.isLoading = false;
-              $scope.mapHeight = $scope.listHeight = $scope.computeFactorHeight(50) + "px";
+              $scope.mapHeight = $scope.listHeight = $scope.computeFactorHeight(50);
               $scope.loadMap();
             });
+        };
+
+        $scope.zoomMap = function() {
+          $scope.mapHeight = $scope.computeFactorHeight(10);
+          $scope.listHeight = $scope.computeFactorHeight(90);
         };
 
         $scope.init = function() {
@@ -31,7 +36,7 @@ angular.module("uMoblets")
         $scope.computeFactorHeight = function(factor) {
           var element = document.querySelector("m-map #wraper");
           var h = Number(element.style["min-height"].replace("px", ""));
-          return h / (100 / factor);
+          return h / (100 / factor) + "px";
         };
 
         $scope.loadMap = function() {
