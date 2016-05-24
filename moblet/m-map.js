@@ -46,7 +46,7 @@ angular.module("uMoblets")
           $scope.listHeight = $scope.computeFactorHeight(10);
           $scope.listMinifiedHeight = $scope.computeFactorHeight(10);
           $scope.listMinified = true;
-          google.maps.event.trigger(map, 'resize');
+          $scope.googleMap.maps.event.trigger(map, 'resize');
         };
 
         $scope.init = function() {
@@ -93,6 +93,7 @@ angular.module("uMoblets")
             if (typeof google === "undefined") {
               $scope.loadMap();
             } else {
+              $scope.googleMap = google;
               var mapData = $scope.mapData;
               var locations = $scope.mapData.locations;
 
@@ -140,8 +141,8 @@ angular.module("uMoblets")
                   })(marker, j));
               }
               return {
-                latitude: latitude,
-                longitude: longitude
+                latitude: mapData.centerLatitude,
+                longitude: mapData.centerLongitude
               };
             }
           }, 100);
