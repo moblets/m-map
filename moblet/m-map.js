@@ -64,27 +64,27 @@ angular.module("uMoblets")
         $scope.findCenter = function() {
           var locations = $scope.mapData.locations;
 
-          var longitudeMin = Number(locations[0].longitude);
-          var latitudeMin = Number(locations[0].latitude);
-          var longitudeMax = Number(locations[0].longitude);
-          var latitudeMax = Number(locations[0].latitude);
+          $scope.longitudeMin = Number(locations[0].longitude);
+          $scope.latitudeMin = Number(locations[0].latitude);
+          $scope.longitudeMax = Number(locations[0].longitude);
+          $scope.latitudeMax = Number(locations[0].latitude);
 
           for (var i = 0; i < locations.length; i++) {
-            if (Number(locations[i].longitude) < longitudeMin) {
-              longitudeMin = Number(locations[i].longitude);
+            if (Number(locations[i].longitude) < $scope.longitudeMin) {
+              $scope.longitudeMin = Number(locations[i].longitude);
             }
-            if (Number(locations[i].longitude) > longitudeMax) {
-              longitudeMax = Number(locations[i].longitude);
+            if (Number(locations[i].longitude) > $scope.longitudeMax) {
+              $scope.longitudeMax = Number(locations[i].longitude);
             }
-            if (Number(locations[i].latitude) < latitudeMin) {
-              latitudeMin = Number(locations[i].latitude);
+            if (Number(locations[i].latitude) < $scope.latitudeMin) {
+              $scope.latitudeMin = Number(locations[i].latitude);
             }
-            if (Number(locations[i].latitude) > latitudeMax) {
-              latitudeMax = Number(locations[i].latitude);
+            if (Number(locations[i].latitude) > $scope.latitudeMax) {
+              $scope.latitudeMax = Number(locations[i].latitude);
             }
           }
-          $scope.mapData.centerLongitude = (longitudeMax + longitudeMin) / 2;
-          $scope.mapData.centerLatitude = (latitudeMax + latitudeMin) / 2;
+          $scope.mapData.centerLongitude = ($scope.longitudeMax + $scope.longitudeMin) / 2;
+          $scope.mapData.centerLatitude = ($scope.latitudeMax + $scope.latitudeMin) / 2;
         };
 
         $scope.loadMap = function() {
@@ -101,7 +101,7 @@ angular.module("uMoblets")
               var marker;
 
               var mapOptions = {
-                zoom: mapData.zoom,
+                // zoom: mapData.zoom,
                 mapTypeControl: false,
                 streetViewControl: false,
                 panControl: false,
@@ -118,13 +118,14 @@ angular.module("uMoblets")
 
               $scope.googleMap = new google.maps.Map(mapDiv, mapOptions);
 
+              // Add the pins
               for (var j = 0; j < locations.length; j++) {
                 marker = new google.maps.Marker({
                   position: new google.maps.LatLng(
                     locations[j].latitude, locations[j].longitude),
                   map: $scope.googleMap
                 });
-
+                // Add the pins content
                 google.maps.event.addListener(
                   marker,
                   'click',
@@ -138,14 +139,16 @@ angular.module("uMoblets")
                     };
                   })(marker, j));
               }
-              google.maps.event.addListener('resize', function() {
-                console.log('resize');
-                console.log($scope.googleMap.getCenter());
-              }, 0.6);
-              google.maps.event.addListener($scope.googleMap, "idle", function() {
-                google.maps.event.trigger($scope.googleMap, 'resize');
-              });
-
+              $scope.googleMap.fitBounds(new google.maps.LatLngBounds(
+                //bottom left
+                // $scope.longitudeMin
+                // $scope.latitudeMin
+                // $scope.longitudeMax
+                // $scope.latitudeMax
+                new google.maps.LatLng($scope.latitudeMin, $scope.longitudeMin),
+                //top right
+                new google.maps.LatLng($scope.latitudeMax, $scope.longitudeMax)
+              ));
               return {
                 latitude: mapData.centerLatitude,
                 longitude: mapData.centerLongitude
