@@ -42,9 +42,11 @@ angular.module("uMoblets")
           $scope.listHeight = $scope.computeFactorHeight(90);
           $scope.showMapButtonHeight = $scope.computeFactorHeight(10);
           $scope.showListButtonHeight = $scope.computeFactorHeight(0);
+          $scope.showMapButtonOpacity = 1;
         };
 
         $scope.zoomMap = function() {
+          $scope.showMapButtonOpacity = 0;
           $scope.mapHeight = $scope.computeFactorHeight(90);
           $scope.listHeight = $scope.computeFactorHeight(10);
           $scope.showMapButtonHeight = $scope.computeFactorHeight(0);
