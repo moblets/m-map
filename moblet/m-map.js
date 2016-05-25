@@ -37,7 +37,7 @@ angular.module("uMoblets")
         };
 
         $scope.zoomList = function() {
-          $scope.mapHeight = $scope.computeFactorHeight(10);
+          $scope.mapHeight = $scope.computeFactorHeight(0);
           $scope.listHeight = $scope.computeFactorHeight(90);
           $scope.mapMinifiedHeight = $scope.computeFactorHeight(10);
           $scope.listMinifiedHeight = $scope.computeFactorHeight(0);
@@ -45,7 +45,7 @@ angular.module("uMoblets")
 
         $scope.zoomMap = function() {
           $scope.mapHeight = $scope.computeFactorHeight(90);
-          $scope.listHeight = $scope.computeFactorHeight(10);
+          $scope.listHeight = $scope.computeFactorHeight(0);
           $scope.mapMinifiedHeight = $scope.computeFactorHeight(0);
           $scope.listMinifiedHeight = $scope.computeFactorHeight(10);
         };
