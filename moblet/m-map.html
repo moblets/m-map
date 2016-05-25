@@ -1,8 +1,11 @@
 
 <u-moblet is-loading="isLoading" init="init">
     <div id="wraper" u-make-frame-min-size >
+      <div class="zoom-button" ng-style="{'height':mapMinifiedHeight}" ng-click="zoomList()">
+        {{listMinifiedText}}
+      </div>
     <div id="m-map-{{moblet.id}}" class="map" ng-click="zoomMap()" ng-style="{'height':mapHeight}"></div>
-    <div class="animate-if" ng-style="{'height':listMinifiedHeight}" ng-click="zoomList()">
+    <div class="zoom-button" ng-style="{'height':listMinifiedHeight}" ng-click="zoomList()">
       {{listMinifiedText}}
     </div>
     <ion-scroll class="address" direction="y" ng-style="{'height':listHeight}" ng-click="zoomList()">
