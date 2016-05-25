@@ -26,7 +26,7 @@ angular.module("uMoblets")
               $scope.mapData = data;
               $scope.isLoading = false;
               $scope.mapHeight = $scope.computeFactorHeight(90);
-              $scope.listHeight = $scope.computeFactorHeight(0);
+              $scope.listHeight = $scope.computeFactorHeight(10);
               $scope.mapMinifiedHeight = $scope.computeFactorHeight(0);
               $scope.listMinifiedHeight = $scope.computeFactorHeight(10);
               $scope.listMinifiedText = $filter('translate')("show_locations");
@@ -45,7 +45,7 @@ angular.module("uMoblets")
 
         $scope.zoomMap = function() {
           $scope.mapHeight = $scope.computeFactorHeight(90);
-          $scope.listHeight = $scope.computeFactorHeight(0);
+          $scope.listHeight = $scope.computeFactorHeight(10);
           $scope.mapMinifiedHeight = $scope.computeFactorHeight(0);
           $scope.listMinifiedHeight = $scope.computeFactorHeight(10);
         };
