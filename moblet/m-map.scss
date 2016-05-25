@@ -7,14 +7,16 @@ m-map {
     overflow: hidden;
     text-align: center;
     font-size: 16px;
-    font-weight: 400;    
-  }
+    font-weight: 400;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ddd;
+    .ng-enter, .ng-leave.ng-leave-active {
+      opacity:0;
+    }
 
-  .zoom-button.ng-enter, .zoom-button.ng-leave.ng-leave-active {
-    opacity:0;
-  }
-
-  .zoom-button.ng-leave, .zoom-button.ng-enter.ng-enter-active {
-    opacity:1;
+    .ng-leave, .ng-enter.ng-enter-active {
+      opacity:1;
+    }
   }
 }
