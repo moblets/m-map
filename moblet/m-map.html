@@ -5,6 +5,9 @@
       {{mapMinifiedText}}
     </div>
     <div id="m-map-{{moblet.id}}" class="map" ng-click="zoomMap()" ng-style="{'height':mapHeight}"></div>
+    <div class="zoom-button" ng-style="{'height':listMinifiedHeight}" ng-click="zoomList()">
+      {{listMinifiedText}}
+    </div>
     <ion-scroll direction="y" ng-style="{'height':listHeight}">
       <div class="address">
         <div class="item" href="#" style="height: 100px;" ng-repeat="(key, location) in mapData.locations">
@@ -14,8 +17,5 @@
         </div>
       </div>
     </ion-scroll>
-    <div class="zoom-button" ng-style="{'height':listMinifiedHeight}" ng-click="zoomList()">
-      {{listMinifiedText}}
-    </div>
   </div>
 </u-moblet>
