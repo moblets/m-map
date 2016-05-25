@@ -28,6 +28,7 @@ angular.module("uMoblets")
               $scope.mapHeight = $scope.computeFactorHeight(90);
               $scope.listHeight = $scope.computeFactorHeight(10);
               $scope.showMapButtonHeight = $scope.computeFactorHeight(0);
+              $scope.showMapButtonOpacity = 0;
               $scope.showListButtonHeight = $scope.computeFactorHeight(10);
               $scope.listMinifiedText = $filter('translate')("show_locations");
               $scope.mapMinifiedText = $filter('translate')("show_map");
