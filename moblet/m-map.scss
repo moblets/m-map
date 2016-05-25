@@ -18,6 +18,10 @@ m-map {
     border-style: solid;
     border-color: #aaa;
 
+    p {
+      margin-top: 15px;
+    }
+
     .ng-enter, .ng-leave.ng-leave-active {
       opacity:0;
     }
