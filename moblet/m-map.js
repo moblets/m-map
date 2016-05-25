@@ -139,7 +139,7 @@ angular.module("uMoblets")
                     };
                   })(marker, j));
               }
-              google.maps.addListener('resize', function() {
+              google.maps.event.addListener('resize', function() {
                 console.log('resize');
                 console.log($scope.googleMap.getCenter());
               }, 0.6);
