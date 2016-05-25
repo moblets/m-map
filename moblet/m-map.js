@@ -95,6 +95,9 @@ angular.module("uMoblets")
               $scope.googleMap = google;
               var mapData = $scope.mapData;
               var locations = $scope.mapData.locations;
+              var mapDiv = document.getElementById("m-map-" + $scope.moblet.id);
+              var infoWindow = new google.maps.InfoWindow();
+              var marker;
 
               var mapOptions = {
                 zoom: mapData.zoom,
@@ -112,12 +115,7 @@ angular.module("uMoblets")
                 ]
               };
 
-              $scope.googleMap = new google.maps.Map(
-                document.getElementById("m-map-" + $scope.moblet.id),
-                mapOptions);
-
-              var infoWindow = new google.maps.InfoWindow();
-              var marker;
+              $scope.googleMap = new google.maps.Map(mapDiv, mapOptions);
 
               for (var j = 0; j < locations.length; j++) {
                 marker = new google.maps.Marker({
@@ -143,7 +141,9 @@ angular.module("uMoblets")
                 console.log('resize');
                 console.log($scope.googleMap.getCenter());
               }, 0.6);
-              google.maps.event.trigger($scope.googleMap, 'resize');
+              google.maps.event.addListener($scope.googleMap, "idle", function() {
+                google.maps.event.trigger($scope.googleMap, 'resize');
+              });
 
               return {
                 latitude: mapData.centerLatitude,
