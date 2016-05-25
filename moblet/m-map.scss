@@ -1,13 +1,11 @@
 m-map {
   .map , .address, .zoom-button{
-    transition: all 0.5s ease-in-out;
   }
   .address {
     overflow-y: scroll;
   }
   #zoom-map {
     border-bottom-width: 1px;
-    margin-bottom: -1px;
   }
   #zoom-list {
     border-top-width: 1px;
@@ -20,9 +18,14 @@ m-map {
     font-weight: 400;
     border-style: solid;
     border-color: #aaa;
+    text-align: -webkit-center;
 
+    .zoom-buttom-wraper {
+      display: table-cell;
+      vertical-align: middle;
+    }
     p {
-      margin-top: 15px;
+      margin: 0;
     }
 
     .ng-enter, .ng-leave.ng-leave-active {

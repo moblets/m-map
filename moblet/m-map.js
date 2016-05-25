@@ -32,6 +32,7 @@ angular.module("uMoblets")
               $scope.zoomListButtonHeight = $scope.computeFactorHeight(10);
               $scope.zoomListButton = $filter('translate')("zoom_locations");
               $scope.zoomMapButton = $filter('translate')("zoom_map");
+              $ionicScrollDelegate.$getByHandle('listMapScroll').resize();
               $scope.findCenter();
               $scope.loadMap();
             });
