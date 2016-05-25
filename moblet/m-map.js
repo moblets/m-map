@@ -41,6 +41,7 @@ angular.module("uMoblets")
           $scope.listHeight = $scope.computeFactorHeight(90);
           $scope.zoomMapButtonHeight = $scope.computeFactorHeight(10);
           $scope.zoomListButtonHeight = $scope.computeFactorHeight(0);
+          $ionicScrollDelegate.$getByHandle('listMapScroll').resize();
         };
 
         $scope.zoomMap = function() {
@@ -48,6 +49,7 @@ angular.module("uMoblets")
           $scope.listHeight = $scope.computeFactorHeight(0);
           $scope.zoomMapButtonHeight = $scope.computeFactorHeight(0);
           $scope.zoomListButtonHeight = $scope.computeFactorHeight(10);
+          $ionicScrollDelegate.$getByHandle('listMapScroll').resize();
         };
 
         $scope.init = function() {
