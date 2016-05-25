@@ -1,8 +1,5 @@
 var feed = function(data) {
-  return {
-    data: data,
-    test: "test"
-  };
+  return data;
 };
 
 module.exports = feed;
