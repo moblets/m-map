@@ -2,6 +2,9 @@ m-map {
   .map , .address, .zoom-button{
     transition: all 0.5s ease-in-out;
   }
+  .address {
+    overflow-y: scroll;
+  }
   #zoom-map {
     border-bottom-width: 1px;
     margin-bottom: -1px;

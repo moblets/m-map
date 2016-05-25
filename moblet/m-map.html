@@ -8,7 +8,7 @@
     <div id="zoom-list" class="zoom-button" ng-style="{'height':zoomListButtonHeight}" ng-click="zoomList()">
       <p><span>{{zoomListButton}}</span></p>
     </div>
-    <ion-scroll class="address" direction="y" ng-style="{'height':listHeight}" ng-click="zoomList()">
+    <div class="address" direction="y" ng-style="{'height':listHeight}" ng-click="zoomList()">
       <div class="list">
           <div class="item" href="#" style="height: 100px;" ng-repeat="(key, location) in mapData.locations">
             <h2>{{location.title}}</h2>
@@ -16,6 +16,6 @@
             <p>{{location.address}}</p>
           </div>
       </div>
-    </ion-scroll>
+    </div>
     </div>
 </u-moblet>
