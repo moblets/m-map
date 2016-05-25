@@ -25,8 +25,8 @@ angular.module("uMoblets")
             .then(function(data) {
               $scope.mapData = data;
               $scope.isLoading = false;
-              $scope.mapHeight = $scope.computeFactorHeight(50);
-              $scope.listHeight = $scope.computeFactorHeight(50);
+              $scope.mapHeight = $scope.computeFactorHeight(90);
+              $scope.listHeight = $scope.computeFactorHeight(10);
               $scope.listMinifiedHeight = $scope.computeFactorHeight(0);
               $scope.listMinifiedText = $filter('translate')("show_locations");
               $scope.findCenter();
