@@ -5,12 +5,4 @@ m-map {
   .zoom-button {
     background-color: blue;
   }
-
-  .zoom-button.ng-enter, .zoom-button.ng-leave.ng-leave-active {
-    opacity:0;
-  }
-
-  .zoom-button.ng-leave, .zoom-button.ng-enter.ng-enter-active {
-    opacity:1;
-  }
 }
