@@ -1,13 +1,6 @@
 {
   "fields": [
     {
-      "name": "zoom",
-      "type": "number",
-      "required": true,
-      "less-than-or-equal": 0,
-      "more-than-or-equal": 19
-    },
-    {
       "name": "mapTypeId",
       "required": true,
       "type": "select",

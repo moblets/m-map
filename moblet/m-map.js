@@ -64,27 +64,31 @@ angular.module("uMoblets")
         $scope.findCenter = function() {
           var locations = $scope.mapData.locations;
 
-          $scope.longitudeMin = Number(locations[0].longitude);
-          $scope.latitudeMin = Number(locations[0].latitude);
-          $scope.longitudeMax = Number(locations[0].longitude);
-          $scope.latitudeMax = Number(locations[0].latitude);
+          var longitudeMin = Number(locations[0].longitude);
+          var latitudeMin = Number(locations[0].latitude);
+          var longitudeMax = Number(locations[0].longitude);
+          var latitudeMax = Number(locations[0].latitude);
 
           for (var i = 0; i < locations.length; i++) {
-            if (Number(locations[i].longitude) < $scope.longitudeMin) {
-              $scope.longitudeMin = Number(locations[i].longitude);
+            if (Number(locations[i].longitude) < longitudeMin) {
+              longitudeMin = Number(locations[i].longitude);
             }
-            if (Number(locations[i].longitude) > $scope.longitudeMax) {
-              $scope.longitudeMax = Number(locations[i].longitude);
+            if (Number(locations[i].longitude) > longitudeMax) {
+              longitudeMax = Number(locations[i].longitude);
             }
-            if (Number(locations[i].latitude) < $scope.latitudeMin) {
-              $scope.latitudeMin = Number(locations[i].latitude);
+            if (Number(locations[i].latitude) < latitudeMin) {
+              latitudeMin = Number(locations[i].latitude);
             }
-            if (Number(locations[i].latitude) > $scope.latitudeMax) {
-              $scope.latitudeMax = Number(locations[i].latitude);
+            if (Number(locations[i].latitude) > latitudeMax) {
+              latitudeMax = Number(locations[i].latitude);
             }
           }
-          $scope.mapData.centerLongitude = ($scope.longitudeMax + $scope.longitudeMin) / 2;
-          $scope.mapData.centerLatitude = ($scope.latitudeMax + $scope.latitudeMin) / 2;
+          $scope.longitudeMin = longitudeMin;
+          $scope.latitudeMin = latitudeMin;
+          $scope.longitudeMax = longitudeMax;
+          $scope.latitudeMax = latitudeMax;
+          $scope.mapData.centerLongitude = (longitudeMax + longitudeMin) / 2;
+          $scope.mapData.centerLatitude = (latitudeMax + latitudeMin) / 2;
         };
 
         $scope.loadMap = function() {
@@ -139,14 +143,9 @@ angular.module("uMoblets")
                     };
                   })(marker, j));
               }
+              // Auto set the map zoom using the extreme points
               $scope.googleMap.fitBounds(new google.maps.LatLngBounds(
-                //bottom left
-                // $scope.longitudeMin
-                // $scope.latitudeMin
-                // $scope.longitudeMax
-                // $scope.latitudeMax
                 new google.maps.LatLng($scope.latitudeMin, $scope.longitudeMin),
-                //top right
                 new google.maps.LatLng($scope.latitudeMax, $scope.longitudeMax)
               ));
               return {
