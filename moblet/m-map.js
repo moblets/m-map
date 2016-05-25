@@ -78,7 +78,7 @@ angular.module("uMoblets")
           )
             .then(function(success) {
               if (success) {
-                window.location.href = "https://www.google.com.br/maps/place/" + $scope.mapData.locations[key].address;
+                window.location.href = "map://-23,-45";
               }
             });
         };
@@ -126,8 +126,11 @@ angular.module("uMoblets")
               var infoWindow = new google.maps.InfoWindow();
               var marker;
 
+              /**
+               * TODO blue point of user location
+               */
               var mapOptions = {
-                // zoom: mapData.zoom,
+                zoom: mapData.zoom,
                 mapTypeControl: false,
                 streetViewControl: false,
                 panControl: false,
@@ -165,6 +168,35 @@ angular.module("uMoblets")
                     };
                   })(marker, j));
               }
+
+              if (navigator.geolocation) {
+                browserSupportFlag = true;
+                navigator.geolocation.getCurrentPosition(function(position) {
+                  initialLocation = new google.maps.LatLng(
+                    position.coords.latitude, position.coords.longitude
+                  );
+                  var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                  };
+                  marker = new google.maps.Marker({
+                    position: pos,
+                    map: $scope.googleMap,
+                    icon: {
+                      url: 'https://i.imgur.com/SwPjYT1.png',
+                      size: new google.maps.Size(16, 16)
+                    }
+                  });
+                  infoWindow.setPosition(pos);
+                  infoWindow.setContent('Location found.');
+                }, function() {
+                  handleNoGeolocation(browserSupportFlag);
+                });
+              } else {
+                browserSupportFlag = false;
+                handleNoGeolocation(browserSupportFlag);
+              }
+
               // Auto set the map zoom using the extreme points
               $scope.googleMap.fitBounds(new google.maps.LatLngBounds(
                 new google.maps.LatLng($scope.latitudeMin, $scope.longitudeMin),
