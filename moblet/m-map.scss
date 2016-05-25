@@ -12,5 +12,12 @@ m-map {
     border-style: solid;
     font-weight: 400;
     font-size: 16px;
+    .ng-enter, .ng-leave.ng-leave-active {
+      opacity:0;
+    }
+
+    .ng-leave, .ng-enter.ng-enter-active {
+      opacity:1;
+    }
   }
 }
