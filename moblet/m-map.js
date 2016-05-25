@@ -97,64 +97,64 @@ angular.module("uMoblets")
             // Wait until 'maps api' has been injected
             if (typeof google === "undefined") {
               $scope.loadMap();
+            } else {
+              $scope.googleMap = google;
+              var mapData = $scope.mapData;
+              var locations = $scope.mapData.locations;
+              var mapDiv = document.getElementById("m-map-" + $scope.moblet.id);
+              var infoWindow = new google.maps.InfoWindow();
+              var marker;
+
+              var mapOptions = {
+                // zoom: mapData.zoom,
+                mapTypeControl: false,
+                streetViewControl: false,
+                panControl: false,
+                rotateControl: false,
+                zoomControl: false,
+                center: new google.maps.LatLng(
+                  mapData.centerLatitude,
+                  mapData.centerLongitude
+                ),
+                mapTypeId: google.maps.MapTypeId[
+                  mapData.mapTypeId
+                ]
+              };
+
+              $scope.googleMap = new google.maps.Map(mapDiv, mapOptions);
+
+              // Add the pins
+              for (var j = 0; j < locations.length; j++) {
+                marker = new google.maps.Marker({
+                  position: new google.maps.LatLng(
+                    locations[j].latitude, locations[j].longitude),
+                  map: $scope.googleMap
+                });
+                // Add the pins content
+                google.maps.event.addListener(
+                  marker,
+                  'click',
+                  (function(marker, j) {
+                    return function() {
+                      infoWindow.setContent(
+                        locations[j].title +
+                        "<br>" +
+                        locations[j].description);
+                      infoWindow.open($scope.googleMap, marker);
+                    };
+                  })(marker, j));
+              }
+              // Auto set the map zoom using the extreme points
+              $scope.googleMap.fitBounds(new google.maps.LatLngBounds(
+                new google.maps.LatLng($scope.latitudeMin, $scope.longitudeMin),
+                new google.maps.LatLng($scope.latitudeMax, $scope.longitudeMax)
+              ));
+              return {
+                latitude: mapData.centerLatitude,
+                longitude: mapData.centerLongitude
+              };
             }
           }, 100);
-
-          $scope.googleMap = google;
-          var mapData = $scope.mapData;
-          var locations = $scope.mapData.locations;
-          var mapDiv = document.getElementById("m-map-" + $scope.moblet.id);
-          var infoWindow = new google.maps.InfoWindow();
-          var marker;
-
-          var mapOptions = {
-            // zoom: mapData.zoom,
-            mapTypeControl: false,
-            streetViewControl: false,
-            panControl: false,
-            rotateControl: false,
-            zoomControl: false,
-            center: new google.maps.LatLng(
-              mapData.centerLatitude,
-              mapData.centerLongitude
-            ),
-            mapTypeId: google.maps.MapTypeId[
-              mapData.mapTypeId
-            ]
-          };
-
-          $scope.googleMap = new google.maps.Map(mapDiv, mapOptions);
-
-          // Add the pins
-          for (var j = 0; j < locations.length; j++) {
-            marker = new google.maps.Marker({
-              position: new google.maps.LatLng(
-                locations[j].latitude, locations[j].longitude),
-              map: $scope.googleMap
-            });
-            // Add the pins content
-            google.maps.event.addListener(
-              marker,
-              'click',
-              (function(marker, j) {
-                return function() {
-                  infoWindow.setContent(
-                    locations[j].title +
-                    "<br>" +
-                    locations[j].description);
-                  infoWindow.open($scope.googleMap, marker);
-                };
-              })(marker, j));
-          }
-          // Auto set the map zoom using the extreme points
-          $scope.googleMap.fitBounds(new google.maps.LatLngBounds(
-            new google.maps.LatLng($scope.latitudeMin, $scope.longitudeMin),
-            new google.maps.LatLng($scope.latitudeMax, $scope.longitudeMax)
-          ));
-          return {
-            latitude: mapData.centerLatitude,
-            longitude: mapData.centerLongitude
-          };
         };
 
         $scope.init();
