@@ -27,8 +27,8 @@ angular.module("uMoblets")
               $scope.isLoading = false;
               $scope.mapHeight = $scope.computeFactorHeight(90);
               $scope.listHeight = $scope.computeFactorHeight(10);
-              $scope.mapMinifiedHeight = $scope.computeFactorHeight(0);
-              $scope.listMinifiedHeight = $scope.computeFactorHeight(10);
+              $scope.showMapButtonHeight = $scope.computeFactorHeight(0);
+              $scope.showListButtonHeight = $scope.computeFactorHeight(10);
               $scope.listMinifiedText = $filter('translate')("show_locations");
               $scope.mapMinifiedText = $filter('translate')("show_map");
               $scope.findCenter();
@@ -39,15 +39,15 @@ angular.module("uMoblets")
         $scope.zoomList = function() {
           $scope.mapHeight = $scope.computeFactorHeight(0);
           $scope.listHeight = $scope.computeFactorHeight(90);
-          $scope.mapMinifiedHeight = $scope.computeFactorHeight(10);
-          $scope.listMinifiedHeight = $scope.computeFactorHeight(0);
+          $scope.showMapButtonHeight = $scope.computeFactorHeight(10);
+          $scope.showListButtonHeight = $scope.computeFactorHeight(0);
         };
 
         $scope.zoomMap = function() {
           $scope.mapHeight = $scope.computeFactorHeight(90);
           $scope.listHeight = $scope.computeFactorHeight(10);
-          $scope.mapMinifiedHeight = $scope.computeFactorHeight(0);
-          $scope.listMinifiedHeight = $scope.computeFactorHeight(10);
+          $scope.showMapButtonHeight = $scope.computeFactorHeight(0);
+          $scope.showListButtonHeight = $scope.computeFactorHeight(10);
         };
 
         $scope.init = function() {
