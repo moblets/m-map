@@ -17,7 +17,8 @@ angular.module("uMoblets")
         $uPlatform,
         $uMoblet,
         $uFeedLoader,
-        $filter
+        $filter,
+        $ionicScrollDelegate
       ) {
         $scope.load = function() {
           $scope.isLoading = true;
