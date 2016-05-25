@@ -18,7 +18,8 @@ angular.module("uMoblets")
         $uMoblet,
         $uFeedLoader,
         $filter,
-        $ionicScrollDelegate
+        $ionicScrollDelegate,
+        $uAlert
       ) {
         $scope.load = function() {
           $scope.isLoading = true;
@@ -30,8 +31,6 @@ angular.module("uMoblets")
               $scope.listHeight = $scope.computeFactorHeight(0);
               $scope.zoomMapButtonHeight = $scope.computeFactorHeight(0);
               $scope.zoomListButtonHeight = $scope.computeFactorHeight(10);
-              $scope.zoomListButton = $filter('translate')("zoom_locations");
-              $scope.zoomMapButton = $filter('translate')("zoom_map");
               $ionicScrollDelegate.$getByHandle('listMapScroll').resize();
               $scope.findCenter();
               $scope.loadMap();
@@ -64,6 +63,24 @@ angular.module("uMoblets")
           var element = document.querySelector("m-map #wraper");
           var h = Number(element.style["min-height"].replace("px", ""));
           return h / (100 / factor) + "px";
+        };
+
+        $scope.openLocation = function(key) {
+          console.log(key);
+          console.log($scope.mapData.locations[key]);
+          $uAlert.dialog(
+            $filter('translate')("open_in_map_app_title"),
+            $filter('translate')("open_in_map_app_message"),
+            [
+              $filter('translate')("cancel"),
+              $filter('translate')("confirm")
+            ]
+          )
+            .then(function(success) {
+              if (success) {
+                window.location.href = "https://www.google.com.br/maps/place/" + $scope.mapData.locations[key].address;
+              }
+            });
         };
 
         $scope.findCenter = function() {

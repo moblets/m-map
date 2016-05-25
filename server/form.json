@@ -16,23 +16,18 @@
       "type": "list",
       "fields": [
         {
+          "name": "title",
+          "type": "text",
+          "required": true,
+          "min-length": 1,
+          "max-length": 30
+        },
+        {
           "name": "address",
           "type": "text",
           "required": true,
           "min-length": 3,
           "max-length": 255
-        },
-        {
-          "name": "title",
-          "type": "text",
-          "required": true,
-          "min-length": 3,
-          "max-length": 255
-        },
-        {
-          "name": "description",
-          "type": "text-area",
-          "max-length": 1023
         }
       ]
     }
