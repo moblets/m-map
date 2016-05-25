@@ -1,7 +1,7 @@
 
 <u-moblet is-loading="isLoading" init="init">
     <div id="wraper" u-make-frame-min-size >
-      <div class="zoom-button" ng-style="{'height':showMapButtonHeight; opacity: showMapButtonOpacity}" ng-click="zoomMap()">
+      <div class="zoom-button" ng-style="{'height':showMapButtonHeight, 'opacity': showMapButtonOpacity}" ng-click="zoomMap()">
         {{listMinifiedText}}
       </div>
     <div id="m-map-{{moblet.id}}" class="map" ng-click="zoomMap()" ng-style="{'height':mapHeight}"></div>
