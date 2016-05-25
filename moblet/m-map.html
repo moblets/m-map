@@ -2,11 +2,11 @@
 <u-moblet is-loading="isLoading" init="init">
     <div id="wraper" u-make-frame-min-size >
       <div id="zoom-map" class="zoom-button" ng-style="{'height':zoomMapButtonHeight}" ng-click="zoomMap()">
-        {{zoomMapButton}}
+        <p>{{zoomMapButton}}</p>
       </div>
     <div id="m-map-{{moblet.id}}" class="map" ng-click="zoomMap()" ng-style="{'height':mapHeight}"></div>
     <div id="zoom-list" class="zoom-button" ng-style="{'height':zoomListButtonHeight}" ng-click="zoomList()">
-      {{zoomListButton}}
+      <p>{{zoomListButton}}</p>
     </div>
     <ion-scroll class="address" direction="y" ng-style="{'height':listHeight}" ng-click="zoomList()">
       <div class="list">
