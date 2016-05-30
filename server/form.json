@@ -4,11 +4,11 @@
       "name": "mapTypeId",
       "required": true,
       "type": "select",
-        "values": {
-          "ROADMAP": "roadmap",
-          "SATELLITE": "satelite",
-          "HYBRID": "hybrid",
-          "TERRAIN": "terrain"
+      "values": {
+        "ROADMAP": "roadmap",
+        "SATELLITE": "satelite",
+        "HYBRID": "hybrid",
+        "TERRAIN": "terrain"
       }
     },
     {

@@ -1,8 +1,4 @@
 m-map {
-  .map , .address, .zoom-button{
-  }
-  .item {
-  }
   .address {
     overflow-y: scroll;
   }
@@ -11,6 +7,14 @@ m-map {
   }
   #zoom-list {
     border-top-width: 1px;
+  }
+  .marker  {
+    h1 {
+      font-size: 16px;
+    }
+    p {
+      font-style: normal;
+    }
   }
   .zoom-button {
     background-color: white;
