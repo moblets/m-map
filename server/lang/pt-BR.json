@@ -1,8 +1,17 @@
 {
     "moblet": {
-        "label": "Mapa",
+        "label": "Mapa de múltiplos pontos",
         "hint": "Crie um mapa com uma lista de lugares",
         "description": "Preencha os campos abaixo para criar a página de mapa"
+    },
+    "mapTypeId": {
+      "label": "Tipo de mapa",
+      "hint": "Escolha o tipo de mapa",
+      "default": "Escolha um tipo",
+      "roadmap": "Ruas",
+      "satelite": "Satélite",
+      "hybrid": "Híbrido",
+      "terrain": "Terreno"
     },
     "locations": {
         "label": "Lista de lugares",
@@ -19,10 +28,5 @@
         "label": "Título",
         "hint": "Título do lugar",
         "placeholder": "Lombard Street"
-    },
-    "description": {
-        "label": "Descrição",
-        "hint": "Descrição do lugar",
-        "placeholder": "Rua fenomenal!"
     }
 }

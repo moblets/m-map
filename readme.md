@@ -23,9 +23,12 @@ This is the folder structure of Fidelity Card moblet:
 2      ├── server
 2.1    |   ├── changelog
 2.1.1  |   |   └── en-US.md
+2.1.1  |   |   └── pt-BR.md
 2.2    |   ├── helper
+2.2.1  |   |   ├── en-US.md
 2.2.1  |   |   ├── pt-BR.md
-2.2.2  |   |   └── example-image.gif
+2.2.2  |   |   ├── m-map-view-list.png
+2.2.2  |   |   └── m-map-view-map.png
 2.3    |   ├── lang
 2.3.1  |   |   ├── en-US.json
 2.3.1  |   |   └── pt-BR.json
@@ -99,8 +102,8 @@ This folder is where you'll store the changes made for each moblet version you c
 
 In this folder you can store localized Markdown files and images.
 
-### 2.1.1 pt-BR.md
-This is an Markdown file describing each version that will display a rendered HTML when an app creator clicks (ver.) in the FabApp CMS.
+### 2.1.1 pt-BR.md and en-US.md
+These are Markdown file describing each version that will display a rendered HTML when an app creator clicks (ver.) in the FabApp CMS.
 
 The name of these Markdowns follow the convention "language" in lower case, followed by an hyphen and, finally, the country code in uppercase.
 
@@ -109,13 +112,13 @@ This folder is where you'll store the helper of your moblet, so app creators can
 
 In this folder you can store localized Markdown files and images.
 
-### 2.2.1 pt-BR.md
-This is an Markdown file that will display a rendered HTML when the app creator clicks on the (?) in the FabApp CMS.
+### 2.2.1 pt-BR.md and en-US.md
+These are Markdown file that will display a rendered HTML when the app creator clicks on the (?) in the FabApp CMS.
 
 The name of these Markdowns follow the convention "language" in lower case, followed by an hyphen and, finally, the country code in uppercase.
 
-### 2.2.2 example-image.gif
-This is an image used in the helper Markdown. It's used by a relative path.
+### 2.2.2 m-map-view-list.png and m-map-view-map.png
+These are images used in the helper Markdown. It's used by a relative path.
 
 ### 2.3 [lang]
 This is the folder where you store the app localization files. You need at least one locale so the moblet is validated.
@@ -129,11 +132,11 @@ Inside these JSON files, we have a structure of objects for each data of the mob
 
 The first object, ```moblet```, is mandatory and must use this name and have all these fields:
 
-```
+```json
 "moblet": {
-    "label": "Fidelity Card",
-    "hint": "Create a fidelity card to your customers",
-    "description": "Fill out the form below to create the fidelity card"
+  "label": "Multipoint Map",
+  "hint": "Create a map with a list of locations",
+  "description": "Fill out the form below to create the map page"
 }
 ```
 These fields are used by the FabApp CMS to display the basic moblet informations as shown in the image below:
@@ -148,29 +151,36 @@ The other fields are directly related to the **form.json** file. Each field in t
 
 For instance, in the form.json, we have this field:
 
-```
+```json
 {
-    "name": "description",
-    "type": "text-area"
+  "name": "mapTypeId",
+  "required": true,
+  "type": "select",
+  "values": {
+    "ROADMAP": "roadmap",
+    "SATELLITE": "satelite",
+    "HYBRID": "hybrid",
+    "TERRAIN": "terrain"
+  }
 },
 ```
 
 In the translation file, we have a label, a hint and a placeholder for this field:
 
-```
-"description": {
-    "label": "Card description",
-    "hint": "This is the text that will be in the top of your card",
-    "placeholder": "Lunch 9 times and the 10th is free!!!"
-}
+```json
+"mapTypeId": {
+  "label": "Tipo de mapa",
+  "hint": "Escolha o tipo de mapa",
+  "default": "Escolha um tipo",
+  "roadmap": "Ruas",
+  "satelite": "Satélite",
+  "hybrid": "Híbrido",
+  "terrain": "Terreno"
+},
 ```
 
 **Field label, placeholder and description**<br>
 ![Field label, placeholder and description](https://i.imgur.com/Z5j3SGZ.png "Field label, placeholder and description")
-
-**The keys must use [snake case] format.**
-
-//TODO: describe each possibility in this translation file
 
 ### 2.4 [form.json]
 This JSON is used by the FabApp CSM to build the moblet configurations an data form.
@@ -208,8 +218,8 @@ This function must return a JSON with the content used by the app module of the 
 
 You can use any [NodeJs] module. Just use ```npm install --save```so the module is added to the ```package.json``` file.
 
-### 2.6 [icon.svg]
-This is the icon used in the FabApp CMS to display the moblet. It's also the default moblet icon, if the app creator don't choose a specific icon.
+### 2.6 [icon.png]
+This is the icon used in the FabApp CMS to display the moblet. It's also the default moblet icon, if the app creator don't choose a specific icon. It must be exactly a **128x128px icon**.
 
 ### 3 [spec]
 This folder and it's structure is created by [Jasmine] test framework. To create this structure, you'll have to install [Jasmine] with ```npm install -g jasmine``` and run ```jasmine init``` in your moblet root folder.
@@ -232,7 +242,31 @@ This is the file created by [NodeJs]. You only need this file if you are using a
 ### 6. readme.md
 This file is where you'll describe your moblet. It's very important if your moblet is Open Source, so other developers can betther understand it and contribute.
 
+## Moblet creation tutorial
+To understand how this moblet was created, let's understand ```m-map/moblet/m-map.html```, ```m-map/moblet/m-map.js``` and ```m-map/moblet/m-map.scss```.
+
+As you can see in the JS, moblets are [AngularJs] **element directives**. In the first lines of the JS you'll see a reference to it's HTML and CSS (the CSS is compiled to a CSS with [m-forge]).
+
+```javascript
+angular.module("uMoblets")
+  .directive('mMap', function($uInjector) {
+    return {
+      restrict: 'E',
+      template: fs.readFileSync(path.join(__dirname, 'm-map.html'), 'utf8'),
+      link: function() {
+        $uInjector.inject("http://maps.google.com/maps/api/js" +
+          "?key=AIzaSyDNzstSiq9llIK8b49En0dT-yFA5YpManU&amp;sensor=true");
+      },
+      .
+      .
+      .
+````
+First, you'll define a directive with an unique name (this one is ```mMap```). The hyphen case version of this name will be injected in the app as an element (```<m-map></m-map>``` in this case)
+
+
 [MIME types]: https://www.iana.org/assignments/media-types/media-types.xhtml
 [snake case]: https://en.wikipedia.org/wiki/Snake_case
 [NodeJs]: https://nodejs.org/en/
+[AngularJs]: https://angularjs.org/
 [Jasmine]: http://jasmine.github.io/2.4/introduction.html
+[m-forge]: https://www.npmjs.com/package/m-forge

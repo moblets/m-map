@@ -12,9 +12,7 @@ angular.module("uMoblets")
           "?key=AIzaSyDNzstSiq9llIK8b49En0dT-yFA5YpManU&amp;sensor=true");
       },
       controller: function(
-        $element,
         $scope,
-        $uPlatform,
         $uMoblet,
         $uFeedLoader,
         $filter,
@@ -147,8 +145,6 @@ angular.module("uMoblets")
               var locations = mapData.locations;
               var mapDiv = document.getElementById("m-map-" + $scope.moblet.id);
 
-              console.log(mapData);
-
               // Set the map options
               var mapOptions = {
                 mapTypeControl: mapData.mapTypeControl,
@@ -184,8 +180,9 @@ angular.module("uMoblets")
           }, 100);
         };
 
-        $scope.load = function() {
+        var init = function() {
           $scope.isLoading = true;
+          $scope.moblet = $uMoblet.load();
           $uFeedLoader.load($scope.moblet, 1, false)
             .then(function(data) {
               // Put the data from the feed in the $scope object
@@ -230,23 +227,10 @@ angular.module("uMoblets")
           $ionicScrollDelegate.$getByHandle('listMapScroll').resize();
         };
 
-        /**
-         * Start loading the needed functions
-         */
-        $scope.init = function() {
-          $scope.isLoading = false;
-          $scope.moblet = $uMoblet.load();
-          $scope.load();
-        };
-
         $scope.openLocation = function(key) {
           var address = $scope.mapData.locations[key].address;
           var latitude = $scope.mapData.locations[key].latitude;
           var longitude = $scope.mapData.locations[key].longitude;
-          console.log(key);
-          console.log(address);
-          console.log(latitude);
-          console.log(longitude);
 
           $uAlert.dialog(
             $filter('translate')("open_in_map_app_title"),
@@ -264,7 +248,7 @@ angular.module("uMoblets")
             });
         };
 
-        $scope.init();
+        init();
       },
       controllerAs: 'mMapController'
     };
