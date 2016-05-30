@@ -144,18 +144,18 @@ angular.module("uMoblets")
 
               $scope.googleMap = google;
               var mapData = $scope.mapData;
-              var locations = $scope.mapData.locations;
+              var locations = mapData.locations;
               var mapDiv = document.getElementById("m-map-" + $scope.moblet.id);
 
-              console.log($scope.mapData);
+              console.log(mapData);
 
               // Set the map options
               var mapOptions = {
-                mapTypeControl: false,
-                streetViewControl: false,
-                panControl: false,
-                rotateControl: false,
-                zoomControl: false,
+                mapTypeControl: mapData.mapTypeControl,
+                streetViewControl: mapData.streetViewControl,
+                panControl: mapData.panControl,
+                rotateControl: mapData.rotateControl,
+                zoomControl: mapData.zoomControl,
                 center: new google.maps.LatLng(
                   mapData.centerLatitude,
                   mapData.centerLongitude
