@@ -1,4 +1,5 @@
 var feed = function(data) {
+  console.log(data);
   data.mapTypeControl = false;
   data.streetViewControl = false;
   data.panControl = false;
