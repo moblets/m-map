@@ -2,6 +2,9 @@ m-map {
   .address {
     overflow-y: scroll;
   }
+  .animate {
+    transition: all 0.5s ease-in-out;
+  }
   #zoom-map {
     border-bottom-width: 1px;
   }
@@ -16,6 +19,16 @@ m-map {
       font-style: normal;
     }
   }
+  #zoom-list {
+    p {
+      margin: -5px 0 5px 0;
+    }
+  }
+  #zoom-map {
+    p {
+      margin: 5px 0 -5px 0;
+    }
+  }
   .zoom-button {
     background-color: white;
     overflow: hidden;
@@ -25,15 +38,10 @@ m-map {
     border-style: solid;
     border-color: #aaa;
     text-align: -webkit-center;
-
-    .zoom-buttom-wraper {
-      display: table-cell;
-      vertical-align: middle;
-    }
-    p {
+    i {
+      font-size: 10px;
       margin: 0;
     }
-
     .ng-enter, .ng-leave.ng-leave-active {
       opacity:0;
     }

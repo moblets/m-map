@@ -1,15 +1,23 @@
 require('./m-map.scss');
 var path = require('path');
 var fs = require('fs');
+var langPT = JSON.parse(fs.readFileSync(
+  path.join(__dirname, 'lang/pt-BR.json'), 'utf8'));
+var langEN = JSON.parse(fs.readFileSync(
+  path.join(__dirname, 'lang/en-US.json'), 'utf8'));
 /* eslint no-undef: [0]*/
 angular.module("uMoblets")
+  .config(function($translateProvider) {
+    $translateProvider.translations('pt', langPT);
+    $translateProvider.translations('en', langEN);
+  })
   .directive('mMap', function($uInjector) {
     return {
       restrict: 'E',
       template: fs.readFileSync(path.join(__dirname, 'm-map.html'), 'utf8'),
       link: function() {
-        $uInjector.inject("http://maps.google.com/maps/api/js" +
-          "?key=AIzaSyDNzstSiq9llIK8b49En0dT-yFA5YpManU&amp;sensor=true");
+        $uInjector.inject('https://maps.google.com/maps/api/js' +
+          '?key=AIzaSyDNzstSiq9llIK8b49En0dT-yFA5YpManU&amp;sensor=true');
       },
       controller: function(
         $scope,
@@ -58,15 +66,19 @@ angular.module("uMoblets")
          * @param  {Array} locations Array of objects with each location detail
          */
         var addMarkers = function(locations) {
-          var marker = '';
-          var infoWindow = new google.maps.InfoWindow();
           // Add the pins
           for (var j = 0; j < locations.length; j++) {
-            marker = new google.maps.Marker({
-              position: new google.maps.LatLng(
-                locations[j].latitude, locations[j].longitude),
-              map: $scope.googleMap
-            });
+            var infoWindow = new google.maps.InfoWindow();
+            var marker = new google.maps.Marker(
+              {
+                position: new google.maps.LatLng(
+                  locations[j].latitude,
+                  locations[j].longitude
+                ),
+                map: $scope.googleMap,
+                animation: google.maps.Animation.DROP
+              }
+            );
             // Add the pins content
             google.maps.event.addListener(
               marker,
@@ -80,7 +92,8 @@ angular.module("uMoblets")
                     '</div>');
                   infoWindow.open($scope.googleMap, marker);
                 };
-              })(marker, j));
+              })(marker, j)
+            );
           }
         };
 
@@ -101,6 +114,7 @@ angular.module("uMoblets")
               marker = new google.maps.Marker({
                 position: pos,
                 map: $scope.googleMap,
+                animation: google.maps.Animation.DROP,
                 icon: {
                   path: google.maps.SymbolPath.CIRCLE,
                   fillColor: '#46AEE2',
@@ -125,10 +139,10 @@ angular.module("uMoblets")
          * should use
          * @return {String}        The height in pixels with "px" in the end
          */
-        var computeFactorHeight = function(factor) {
-          var element = document.querySelector("m-map #wraper");
+        var screenHeightLessButton = function() {
+          var element = document.querySelector("m-map u-moblet");
           var h = Number(element.style["min-height"].replace("px", ""));
-          return h / (100 / factor) + "px";
+          return (h - 44) + "px";
         };
 
         var loadMap = function() {
@@ -143,7 +157,7 @@ angular.module("uMoblets")
               $scope.googleMap = google;
               var mapData = $scope.mapData;
               var locations = mapData.locations;
-              var mapDiv = document.getElementById("m-map-" + $scope.moblet.id);
+              var mapDiv = document.getElementById('m-map-' + $scope.moblet.id);
 
               // Set the map options
               var mapOptions = {
@@ -156,9 +170,7 @@ angular.module("uMoblets")
                   mapData.centerLatitude,
                   mapData.centerLongitude
                 ),
-                mapTypeId: google.maps.MapTypeId[
-                  mapData.mapTypeId
-                ]
+                mapTypeId: google.maps.MapTypeId[mapData.mapTypeId]
               };
 
               $scope.googleMap = new google.maps.Map(mapDiv, mapOptions);
@@ -174,6 +186,20 @@ angular.module("uMoblets")
               $scope.googleMap.addListener('idle', function() {
                 $timeout(function() {
                   $scope.isLoading = false;
+                  var zoomButtons = document
+                    .getElementsByClassName('zoom-button');
+                  for (var z = 0; z < zoomButtons.length; z++) {
+                    zoomButtons[z].className += ' animate';
+                  }
+                  console.log(document
+                    .getElementById('m-map-' + $scope.moblet.id));
+                  document
+                    .getElementById('m-map-' + $scope.moblet.id)
+                    .className = 'animate';
+
+                  document
+                    .getElementById('m-map-list')
+                    .className = 'animate';
                 }, 1);
               });
             }
@@ -187,13 +213,13 @@ angular.module("uMoblets")
             .then(function(data) {
               // Put the data from the feed in the $scope object
               $scope.mapData = data;
-              // Split the screen in two portions. The map is 90% and the
-              // "show list" button 10%. The list and the "show map" botton
-              // are 0%
-              $scope.mapHeight = computeFactorHeight(90);
-              $scope.listHeight = computeFactorHeight(0);
-              $scope.zoomMapButtonHeight = computeFactorHeight(0);
-              $scope.zoomListButtonHeight = computeFactorHeight(10);
+              // Split the screen in two portions. The show list button is 44px
+              // and the map will take the remaining portion of the screen.
+              // The list and the "show map" botton are set to 0.
+              $scope.mapHeight = screenHeightLessButton();
+              $scope.listHeight = 0;
+              $scope.zoomMapButtonHeight = 0;
+              $scope.zoomListButtonHeight = "44px";
 
               // Set the Ionic scroll javascript to the list of locations
               // You need to set 'delegate-handle="listMapScroll"' on the
@@ -209,10 +235,10 @@ angular.module("uMoblets")
          * Focus and expand the list of locations
          */
         $scope.zoomList = function() {
-          $scope.mapHeight = computeFactorHeight(0);
-          $scope.listHeight = computeFactorHeight(90);
-          $scope.zoomMapButtonHeight = computeFactorHeight(10);
-          $scope.zoomListButtonHeight = computeFactorHeight(0);
+          $scope.mapHeight = 0;
+          $scope.listHeight = screenHeightLessButton();
+          $scope.zoomMapButtonHeight = "44px";
+          $scope.zoomListButtonHeight = 0;
           $ionicScrollDelegate.$getByHandle('listMapScroll').resize();
         };
 
@@ -220,10 +246,10 @@ angular.module("uMoblets")
          * Focus and expand the map
          */
         $scope.zoomMap = function() {
-          $scope.mapHeight = computeFactorHeight(90);
-          $scope.listHeight = computeFactorHeight(0);
-          $scope.zoomMapButtonHeight = computeFactorHeight(0);
-          $scope.zoomListButtonHeight = computeFactorHeight(10);
+          $scope.mapHeight = screenHeightLessButton();
+          $scope.listHeight = 0;
+          $scope.zoomMapButtonHeight = 0;
+          $scope.zoomListButtonHeight = "44px";
           $ionicScrollDelegate.$getByHandle('listMapScroll').resize();
         };
 
