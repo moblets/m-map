@@ -1,17 +1,6 @@
 {
   "fields": [
     {
-      "name": "mapTypeId",
-      "required": true,
-      "type": "select",
-      "values": {
-        "ROADMAP": "roadmap",
-        "SATELLITE": "satelite",
-        "HYBRID": "hybrid",
-        "TERRAIN": "terrain"
-      }
-    },
-    {
       "name": "locations",
       "type": "list",
       "fields": [
@@ -30,6 +19,17 @@
           "max-length": 255
         }
       ]
+    },
+    {
+      "name": "mapTypeId",
+      "required": true,
+      "type": "select",
+      "values": {
+        "ROADMAP": "roadmap",
+        "SATELLITE": "satelite",
+        "HYBRID": "hybrid",
+        "TERRAIN": "terrain"
+      }
     }
   ]
 }

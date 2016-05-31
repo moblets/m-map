@@ -5,34 +5,35 @@
 module.exports = {
   /**
    * Validate a given address as a valid Google Maps address
-   * @param  {String} address The address
-   * @return {Object}         Object with a boolean key called 'valid'. If
-   * valid is true, another object called data is included. If not valid, an
-   * object called errors is included.
+   * @param {Object}   location Object with one of the "locations" array data.
+   * @param {Function} callback The callback that will be called when the
+   * validation finishes. The callback parameters are a Boolean, that responds
+   * if it's valid and an Object with the response data
    */
-  address: function(address) {
+  locations: function(location, callback) {
+    var valid = false;
     var response = {};
     // "Rua James Watt, 84 - são paulo - sp"
-    getGoogleMapsData(address, function(mapData) {
+    getGoogleMapsData(location.address, function(mapData) {
       // console.log(mapData);
       if (mapData.status === 'OK') {
+        valid = true;
         response = {
-          valid: true,
           data: {
             latitude: mapData.results[0].geometry.location.lat,
             longitude: mapData.results[0].geometry.location.lng
           }
         };
       } else {
+        valid = false;
         response = {
-          valid: false,
           errors: {
             address: 'error_address'
           }
         };
       }
+      callback(valid, response);
     });
-    return response;
   }
 };
 
