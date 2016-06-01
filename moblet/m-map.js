@@ -183,15 +183,12 @@ module.exports = {
               for (var z = 0; z < zoomButtons.length; z++) {
                 zoomButtons[z].className += ' animate';
               }
-              console.log(document
-                .getElementById('m-map-' + $scope.moblet.id));
               document
                 .getElementById('m-map-' + $scope.moblet.id)
                 .className = 'animate';
-
               document
                 .getElementById('m-map-list')
-                .className = 'animate';
+                .className += ' animate';
             }, 1);
           });
         }
