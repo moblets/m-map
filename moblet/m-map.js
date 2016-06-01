@@ -1,3 +1,4 @@
+/* eslint no-undef: [0]*/
 module.exports = {
   title: "mMap",
   style: "m-map.scss",
@@ -200,7 +201,12 @@ module.exports = {
     var init = function() {
       $scope.isLoading = true;
       $scope.moblet = $uMoblet.load();
-      $uFeedLoader.load($scope.moblet, 1, false)
+      var options = {
+        offset: 1,
+        items: 25,
+        itemsArray: "locations"
+      };
+      $uFeedLoader.load($scope.moblet, options, false)
         .then(function(data) {
           // Put the data from the feed in the $scope object
           $scope.mapData = data;
