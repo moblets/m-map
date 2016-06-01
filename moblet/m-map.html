@@ -9,7 +9,7 @@
       <i class="icon ion-chevron-up"></i>
       <p translate="zoom_list">
     </div>
-    <ion-scroll overflow-scroll="false" delegate-handle="listMapScroll" ng-style="{'height':listHeight}" ng-click="zoomList()">
+    <ion-scroll id="m-map-list" overflow-scroll="false" delegate-handle="listMapScroll" ng-style="{'height':listHeight}" ng-click="zoomList()">
       <div class="list">
           <div class="item item-icon-right" ng-repeat="(key, location) in mapData.locations">
             <h2>{{location.title}}</h2>
