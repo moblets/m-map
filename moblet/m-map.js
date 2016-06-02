@@ -53,6 +53,16 @@ module.exports = {
       $scope.mapData.centerLatitude = (latitudeMax + latitudeMin) / 2;
     };
 
+    var markerListener = function(infoWindow, marker, location) {
+      return function() {
+        infoWindow.setContent(
+          '<div class="marker">' +
+          '<h1>' + location.title + '</h1>' +
+          '<p>' + location.address + '</p>' +
+          '</div>');
+        infoWindow.open($scope.googleMap, marker);
+      };
+    };
     /**
      * Add the markers to the map
      * @param  {Array} locations Array of objects with each location detail
@@ -75,16 +85,7 @@ module.exports = {
         google.maps.event.addListener(
           marker,
           'click',
-          (function(marker, j) {
-            return function() {
-              infoWindow.setContent(
-                '<div class="marker">' +
-                '<h1>' + locations[j].title + '</h1>' +
-                '<p>' + locations[j].address + '</p>' +
-                '</div>');
-              infoWindow.open($scope.googleMap, marker);
-            };
-          })(marker, j)
+          markerListener(infoWindow, marker, locations[j])
         );
       }
     };
