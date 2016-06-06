@@ -1,4 +1,9 @@
+
+[toc]
+
+
 # Map - moblet example
+
 This is a moblet example created for Moblets. Developers can use this moblet to better understand how to create their own.
 
 For other moblets, please access [Moblets' GitHub page](https://github.com/moblets/).
@@ -7,7 +12,7 @@ For other moblets, please access [Moblets' GitHub page](https://github.com/moble
 Moblets' name comes from _Mobile_ + _Widgets_. It's a project created to simplify the creation of mobile apllications. Apps created with Moblets structure are used in [FabApp](http://fabapp.com) CMS.
 
 ## Structure
-As Moblets is based on Apache Cordova, it's moblets are created with HTML, CSS and JavaScript. Moblets' apps have a base prepared to receive a predefined structure and work with it.
+As Moblets is based on Apache Cordova, the apps are hybrid and it's moblets are created with HTML, CSS and JavaScript. Moblets' apps have a base prepared to receive a predefined structure and work with it.
 
 This is the folder structure of Fidelity Card moblet:
 
@@ -23,12 +28,9 @@ This is the folder structure of Fidelity Card moblet:
 2      ├── server
 2.1    |   ├── changelog
 2.1.1  |   |   └── en-US.md
-2.1.1  |   |   └── pt-BR.md
 2.2    |   ├── helper
-2.2.1  |   |   ├── en-US.md
 2.2.1  |   |   ├── pt-BR.md
-2.2.2  |   |   ├── m-map-view-list.png
-2.2.2  |   |   └── m-map-view-map.png
+2.2.2  |   |   └── example-image.gif
 2.3    |   ├── lang
 2.3.1  |   |   ├── en-US.json
 2.3.1  |   |   └── pt-BR.json
@@ -67,9 +69,9 @@ Inside these JSON files, we have each string that needs translation.
 
 e.g.
 
-```
-$filter('translate')("reward_confirm")
-```
+
+    $filter('translate')("reward_confirm")
+
 
 ### 1.2 m-map.html
 This is the moblet HTML used to display the moblet content in the app.
@@ -87,6 +89,8 @@ This is an [AngularJS directive](https://docs.angularjs.org/guide/directive) Jav
 
 This file must use the ```restrict: 'E'``` convention so it will create an **element**.
 
+You can better understand a moblet creation in the [final section of this readme](#tutorial-to-create-a-moblet).
+
 ### 1.4 m-map.scss
 This is the moblet CSS used for the Moblet's business logic. You can use CSS, SCSS or SASS for this.
 
@@ -103,7 +107,7 @@ This folder is where you'll store the changes made for each moblet version you c
 In this folder you can store localized Markdown files and images.
 
 ### 2.1.1 pt-BR.md and en-US.md
-These are Markdown file describing each version that will display a rendered HTML when an app creator clicks (ver.) in the FabApp CMS.
+These are Markdown files describing each version that will display a rendered HTML when an app creator clicks (ver.) in the FabApp CMS.
 
 The name of these Markdowns follow the convention "language" in lower case, followed by an hyphen and, finally, the country code in uppercase.
 
@@ -113,11 +117,11 @@ This folder is where you'll store the helper of your moblet, so app creators can
 In this folder you can store localized Markdown files and images.
 
 ### 2.2.1 pt-BR.md and en-US.md
-These are Markdown file that will display a rendered HTML when the app creator clicks on the (?) in the FabApp CMS.
+These are Markdown files that will display a rendered HTML when the app creator clicks on the (?) in the FabApp CMS.
 
 The name of these Markdowns follow the convention "language" in lower case, followed by an hyphen and, finally, the country code in uppercase.
 
-### 2.2.2 m-map-view-list.png and m-map-view-map.png
+### 2.2.2 images
 These are images used in the helper Markdown. It's used by a relative path.
 
 ### 2.3 [lang]
@@ -132,11 +136,11 @@ Inside these JSON files, we have a structure of objects for each data of the mob
 
 The first object, ```moblet```, is mandatory and must use this name and have all these fields:
 
-```json
+```
 "moblet": {
-  "label": "Multipoint Map",
-  "hint": "Create a map with a list of locations",
-  "description": "Fill out the form below to create the map page"
+    "label": "Fidelity Card",
+    "hint": "Create a fidelity card to your customers",
+    "description": "Fill out the form below to create the fidelity card"
 }
 ```
 These fields are used by the FabApp CMS to display the basic moblet informations as shown in the image below:
@@ -151,36 +155,29 @@ The other fields are directly related to the **form.json** file. Each field in t
 
 For instance, in the form.json, we have this field:
 
-```json
+```
 {
-  "name": "mapTypeId",
-  "required": true,
-  "type": "select",
-  "values": {
-    "ROADMAP": "roadmap",
-    "SATELLITE": "satelite",
-    "HYBRID": "hybrid",
-    "TERRAIN": "terrain"
-  }
+    "name": "description",
+    "type": "text-area"
 },
 ```
 
 In the translation file, we have a label, a hint and a placeholder for this field:
 
-```json
-"mapTypeId": {
-  "label": "Tipo de mapa",
-  "hint": "Escolha o tipo de mapa",
-  "default": "Escolha um tipo",
-  "roadmap": "Ruas",
-  "satelite": "Satélite",
-  "hybrid": "Híbrido",
-  "terrain": "Terreno"
-},
+```
+"description": {
+    "label": "Card description",
+    "hint": "This is the text that will be in the top of your card",
+    "placeholder": "Lunch 9 times and the 10th is free!!!"
+}
 ```
 
 **Field label, placeholder and description**<br>
 ![Field label, placeholder and description](https://i.imgur.com/Z5j3SGZ.png "Field label, placeholder and description")
+
+**The keys must use [snake case] format.**
+
+//TODO: describe each possibility in this translation file
 
 ### 2.4 [form.json]
 This JSON is used by the FabApp CSM to build the moblet configurations an data form.
@@ -218,8 +215,8 @@ This function must return a JSON with the content used by the app module of the 
 
 You can use any [NodeJs] module. Just use ```npm install --save```so the module is added to the ```package.json``` file.
 
-### 2.6 [icon.png]
-This is the icon used in the FabApp CMS to display the moblet. It's also the default moblet icon, if the app creator don't choose a specific icon. It must be exactly a **128x128px icon**.
+### 2.6 [icon.svg]
+This is the icon used in the FabApp CMS to display the moblet. It's also the default moblet icon, if the app creator don't choose a specific icon.
 
 ### 3 [spec]
 This folder and it's structure is created by [Jasmine] test framework. To create this structure, you'll have to install [Jasmine] with ```npm install -g jasmine``` and run ```jasmine init``` in your moblet root folder.
@@ -242,31 +239,196 @@ This is the file created by [NodeJs]. You only need this file if you are using a
 ### 6. readme.md
 This file is where you'll describe your moblet. It's very important if your moblet is Open Source, so other developers can betther understand it and contribute.
 
-## Moblet creation tutorial
-To understand how this moblet was created, let's understand ```m-map/moblet/m-map.html```, ```m-map/moblet/m-map.js``` and ```m-map/moblet/m-map.scss```.
+##Tutorial to create a moblet<a id="tutorial-to-create-a-moblet"></a>
 
-As you can see in the JS, moblets are [AngularJs] **element directives**. In the first lines of the JS you'll see a reference to it's HTML and CSS (the CSS is compiled to a CSS with [m-forge]).
+
+To begin understanding how to create a moblet, let's take a look in the moblet (m-map/moblet) folder. All theses files will be embeded in the app in a single bundle created by Moblet's [m-forge].
+
+Open ```m-map/moblet/m-map.js```, ```m-map/moblet/m-map.html``` and ```m-map/moblet/m-map.scss```.
+
+### Directive
+Moblets are [AngularJs] **element directives**, as you can see in ```m-map.js``` begining. This means a moblet is injected in the app as an element in it's HTML and that's why the SCSS has all it's options inside a single m-map element.
 
 ```javascript
+require('./m-map.scss');
+.
+.
+.
 angular.module("uMoblets")
   .directive('mMap', function($uInjector) {
     return {
       restrict: 'E',
       template: fs.readFileSync(path.join(__dirname, 'm-map.html'), 'utf8'),
-      link: function() {
-        $uInjector.inject("http://maps.google.com/maps/api/js" +
-          "?key=AIzaSyDNzstSiq9llIK8b49En0dT-yFA5YpManU&amp;sensor=true");
-      },
-      .
-      .
-      .
-````
-First, you'll define a directive with an unique name (this one is ```mMap```). The hyphen case version of this name will be injected in the app as an element (```<m-map></m-map>``` in this case)
+```
+
+The directive is called **mMap** and the element is it's hyphen case version, **m-map**.
+
+In the begining of this JavaScript code we inject the CSS – ```require('./m-map.scss')``` - [m-forge] compiles this SCSS into a CSS – , tell AngularJs it's an **Element** directive – ```restrict: 'E'```–  and set the path of the HTML template – ```template: fs.readFileSync(path.join(__dirname, 'm-map.html'), 'utf8')```.
+
+### Directive link
+In this moblet, we use the **directive link** to inject an external JavaSript (Google Maps' JavaScript) tha will be used in it's **controller**.
+
+```javascript
+link: function() {
+    $uInjector.inject("http://maps.google.com/maps/api/js" +
+      "?key=AIzaSyDNzstSiq9llIK8b49En0dT-yFA5YpManU&amp;sensor=true");
+  },
+```
+
+We use **$uInjector** to inject the JS and then we'll see a function that holds the exection until this injection has finished loading.
+
+This will create a script tag that will be added to the HTML when the moblet runs:
+
+    <script src="http://maps.google.com/maps/api/js?key=AIzaSyDNzstSiq9llIK8b49En0dT-yFA5YpManU&amp;amp;sensor=true"></script>
+
+### Directive controller
+
+The controller is where all the moblet logic resides. From displying data in the HTML view, to the communication with NoRMA and your feed (using your **server/feed.js** file).
+
+First, we call the controller function with all the needed parameters we'll use in the moblet:
+
+```javascript
+controller: function(
+    $scope,
+    $uMoblet,
+    $uFeedLoader,
+    $filter,
+    $ionicScrollDelegate,
+    $uAlert,
+    $timeout
+  ) {
+```
+
+### The init function
+In line 259, we call ```init();```, that will run all the needed stuff to load the moblet.
+
+Let's take a look in the ```init``` function:
+
+```javascript
+var init = function() {
+  $scope.isLoading = true;
+  $scope.moblet = $uMoblet.load();
+  $uFeedLoader.load($scope.moblet, 1, false)
+    .then(function(data) {
+      // Put the data from the feed in the $scope object
+      $scope.mapData = data;
+      // Split the screen in two portions. The map is 90% and the
+      // "show list" button 10%. The list and the "show map" botton
+      // are 0%
+      $scope.mapHeight = computeFactorHeight(90);
+      $scope.listHeight = computeFactorHeight(0);
+      $scope.zoomMapButtonHeight = computeFactorHeight(0);
+      $scope.zoomListButtonHeight = computeFactorHeight(10);
+
+      // Set the Ionic scroll javascript to the list of locations
+      // You need to set 'delegate-handle="listMapScroll"' on the
+      // HTML
+      $ionicScrollDelegate.$getByHandle('listMapScroll').resize();
+
+      findCenter();
+      loadMap();
+    });
+};
+```
+
+Let's break this code into parts to better understand it.
+
+#### isLoading variable
+The first thing we do is set the **$scope.loading** variable to ```true```, so the moblet is covered with a loading screen while loading. We'll change it to ```false``` after the moblet has finished loading.
+
+In [AngularJs], the $scope variable is **global** and can be accessed by any part of the application and the HTML using specific tags and functions.
+
+#### moblet variable
+
+We set the **moblet** variable using a Moblets function called ```$uMoblet.load()``` and it contains the data needed to load the moblet feed:
+
+```json
+{
+    mobletType: "google_map",
+    proxy: "http://proxy.universo2.local/moblets/",
+    id: "9",
+    jsonUrl: "http://proxy.universo2.local/moblets/9.json"
+}
+```
+
+The **jsonUrl** is the URL of the feed, the response of the ```server/feed.js``` [NodeJs] file.
+
+For instance, in this case, calling this URL will responde with the following Json:
+
+```json
+{
+    mapTypeId: "ROADMAP",
+    locations: [
+        {
+            address: "Av. Faria Lima, 2534",
+            title: "Faria Lima",
+            latitude: "-23.597245",
+            longitude: "-46.821253"
+        },
+        {
+            address: "Av. Rebouças, 300",
+            title: "Revouças",
+            latitude: "-23.629766",
+            longitude: "-46.721441"
+        }
+    ],
+    mapTypeControl: false,
+    streetViewControl: false,
+    panControl: false,
+    rotateControl: false,
+    zoomControl: false
+}
+```
+
+This is the Json answered by the feed created by us for this moblet.
+
+#### Loading the feed
+
+As we now know the moblet feed URL, we call it using the **$uFeedLoader.load** function. The parameters are **the moblet object**, the **page** (1, as we have only one pae in this case) and if we'll use the **local storage caché** instead of loading the feed.
+
+After the data is loaded, the **.then** is called with the feed response (the **data** object).
+
+As we'll use this data all around the moblet, web put it in a global variable using ```$scope.mapData = data;```.
+
+##### Setting the div heights
+
+Now, let's take a look in the moblet HTML to understand how it's made and why we'll set the heights dinamically using Moblets' **u-make-frame-min-size** function.
+
+
+```html
+<u-moblet is-loading="isLoading" init="init" inner-scroll="true">
+  <div id="wraper" u-make-frame-min-size >
+    <div id="zoom-map" class="zoom-button" ng-style="{'height':zoomMapButtonHeight}" ng-click="zoomMap()">
+      <div class="zoom-buttom-wraper" ng-style="{'height':zoomMapButtonHeight}">
+        <p translate="zoom_map"></p>
+      </div>
+    </div>
+    <div id="m-map-{{moblet.id}}" class="map" ng-click="zoomMap()" ng-style="{'height':mapHeight}"></div>
+    <div id="zoom-list" class="zoom-button" ng-style="{'height':zoomListButtonHeight}" ng-click="zoomList()">
+      <div class="zoom-buttom-wraper" ng-style="{'height':zoomListButtonHeight}">
+        <p translate="zoom_list">
+      </div>
+    </div>
+    <ion-scroll overflow-scroll="false" delegate-handle="listMapScroll" ng-style="{'height':listHeight}" ng-click="zoomList()">
+      <div class="list">
+          <div class="item item-icon-right" ng-repeat="(key, location) in mapData.locations">
+            <h2>{{location.title}}</h2>
+            <p>{{location.address}}</p>
+            <i class="icon ion-ios-navigate" ng-click="openLocation(key)"></i>
+          </div>
+      </div>
+    </ion-scroll>
+  </div>
+</u-moblet>
+```
+
+
+
 
 
 [MIME types]: https://www.iana.org/assignments/media-types/media-types.xhtml
 [snake case]: https://en.wikipedia.org/wiki/Snake_case
 [NodeJs]: https://nodejs.org/en/
-[AngularJs]: https://angularjs.org/
 [Jasmine]: http://jasmine.github.io/2.4/introduction.html
 [m-forge]: https://www.npmjs.com/package/m-forge
+[AngularJs]: https://angularjs.org

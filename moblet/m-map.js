@@ -139,7 +139,7 @@ module.exports = {
     };
 
     var loadMap = function() {
-      setTimeout(function() {
+      $timeout(function() {
         // Wait until 'maps api' has been injected
         if (typeof google === "undefined") {
           loadMap();
