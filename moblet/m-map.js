@@ -13,8 +13,8 @@ module.exports = {
   },
   controller: function(
     $scope,
-    $uMoblet,
-    $uFeedLoader,
+    $mMoblet,
+    $mDataLoader,
     $filter,
     $ionicScrollDelegate,
     $uAlert,
@@ -198,13 +198,13 @@ module.exports = {
 
     var init = function() {
       $scope.isLoading = true;
-      $scope.moblet = $uMoblet.load();
+      $scope.moblet = $mMoblet.load();
       var options = {
         offset: 1,
         items: 25,
         itemsArray: "locations"
       };
-      $uFeedLoader.load($scope.moblet, options, false)
+      $mDataLoader.load($scope.moblet, false, options)
         .then(function(data) {
           // Put the data from the feed in the $scope object
           $scope.mapData = data;
