@@ -199,13 +199,12 @@ module.exports = {
     var init = function() {
       $scope.isLoading = true;
       $scope.moblet = $mMoblet.load();
-      var options = {
-        offset: 1,
-        items: 25,
-        itemsArray: "locations"
+      dataLoadOptions = {
+        cache: false
       };
-      $mDataLoader.load($scope.moblet, false, options)
+      $mDataLoader.load($scope.moblet, dataLoadOptions)
         .then(function(data) {
+          console.log(data);
           // Put the data from the feed in the $scope object
           $scope.mapData = data;
           // Split the screen in two portions. The show list button is 44px
