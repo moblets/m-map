@@ -28,7 +28,7 @@ module.exports = {
         valid = false;
         response = {
           errors: {
-            address: mapData
+            address: 'error_address'
           }
         };
       }

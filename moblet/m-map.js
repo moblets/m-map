@@ -18,7 +18,8 @@ module.exports = {
     $filter,
     $ionicScrollDelegate,
     $uAlert,
-    $timeout
+    $timeout,
+    $mFrameSize
   ) {
     /**
      * Find the center of the map based on the locations.
@@ -133,9 +134,8 @@ module.exports = {
      * @return {String}        The height in pixels with "px" in the end
      */
     var screenHeightLessButton = function() {
-      var element = document.querySelector("m-map #wraper");
-      var h = Number(element.style["min-height"].replace("px", ""));
-      return (h - 44) + "px";
+      var height = parseInt($mFrameSize.height(), 10);
+      return (height - 44) + "px";
     };
 
     var loadMap = function() {
