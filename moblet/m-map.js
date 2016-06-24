@@ -120,11 +120,12 @@ module.exports = {
             }
           });
         }, function() {
-          handleNoGeolocation(browserSupportFlag);
+          browserSupportFlag = false;
+          // handleNoGeolocation(browserSupportFlag);
         });
       } else {
         browserSupportFlag = false;
-        handleNoGeolocation(browserSupportFlag);
+        // handleNoGeolocation(browserSupportFlag);
       }
     };
 
