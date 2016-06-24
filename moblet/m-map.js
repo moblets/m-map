@@ -19,7 +19,8 @@ module.exports = {
     $ionicScrollDelegate,
     $uAlert,
     $timeout,
-    $mFrameSize
+    $mFrameSize,
+    $mWebview
   ) {
     /**
      * Find the center of the map based on the locations.
@@ -267,7 +268,11 @@ module.exports = {
               address + '/@' + latitude + ',' + longitude;
 
             window.open(mapUrl, '_blank');
-            // $mWebview.open(0, mapUrl, "_system", undefined, "", "", "", "", true);
+            $mWebview.open(
+              0, mapUrl, "_blank", undefined, "olar", "#ff0000", "", "", false
+            );
+            cordova.InAppBrowser.open(mapUrl, '_blank', 'location=yes');
+// (id, url, target, options, title, color, background, loading, isBanner);
           }
         });
     };
