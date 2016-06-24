@@ -267,7 +267,6 @@ module.exports = {
             var mapUrl = 'https://www.google.com.br/maps/place/' +
               address + '/@' + latitude + ',' + longitude;
 
-            window.open(mapUrl, '_blank');
             $mWebview.open(
               0, mapUrl, "_blank", undefined, "olar", "#ff0000", "", "", false
             );
