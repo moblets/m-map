@@ -18,7 +18,12 @@
           <div class="item item-icon-right" ng-repeat="(key, location) in mapData.locations">
             <h2>{{location.title}}</h2>
             <p>{{location.address}}</p>
-            <i class="icon ion-ios-navigate" ng-click="openLocation(key)"></i>
+            <div ng-if="iOsStandalone">
+              <a href="{{ getExternalMapLink(key) }}"><i class="icon ion-ios-navigate"></i></a>
+            </div>
+            <div ng-if="!iOsStandalone">
+              <i class="icon ion-ios-navigate" ng-click="openLocation(key)"></i>
+            </div>
           </div>
       </div>
     </ion-scroll>

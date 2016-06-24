@@ -20,7 +20,8 @@ module.exports = {
     $uAlert,
     $timeout,
     $mFrameSize,
-    $mWebview
+    $mWebview,
+    $uPlatform
   ) {
     /**
      * Find the center of the map based on the locations.
@@ -249,11 +250,18 @@ module.exports = {
       $ionicScrollDelegate.$getByHandle('listMapScroll').resize();
     };
 
-    $scope.openLocation = function(key) {
+    $scope.iOsStandalone = $uPlatform.isIOS() && window.navigator.standalone;
+
+    $scope.getExternalMapLink = function(key) {
       var address = $scope.mapData.locations[key].address;
       var latitude = $scope.mapData.locations[key].latitude;
       var longitude = $scope.mapData.locations[key].longitude;
 
+      return 'https://www.google.com.br/maps/place/' +
+        address + '/@' + latitude + ',' + longitude;
+    };
+
+    $scope.openLocation = function(key) {
       $uAlert.dialog(
         $filter('translate')("open_in_map_app_title"),
         $filter('translate')("open_in_map_app_message"),
@@ -264,14 +272,10 @@ module.exports = {
       )
         .then(function(success) {
           if (success) {
-            var mapUrl = 'https://www.google.com.br/maps/place/' +
-              address + '/@' + latitude + ',' + longitude;
-
+            var mapUrl = $scope.getExternalMapLink(key);
             $mWebview.open(
               0, mapUrl, "_blank", undefined, "olar", "#ff0000", "", "", false
             );
-            cordova.InAppBrowser.open(mapUrl, '_blank', 'location=yes');
-// (id, url, target, options, title, color, background, loading, isBanner);
           }
         });
     };
