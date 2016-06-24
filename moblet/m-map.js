@@ -19,7 +19,8 @@ module.exports = {
     $ionicScrollDelegate,
     $uAlert,
     $timeout,
-    $mFrameSize
+    $mFrameSize,
+    $mWebview
   ) {
     /**
      * Find the center of the map based on the locations.
@@ -262,8 +263,10 @@ module.exports = {
       )
         .then(function(success) {
           if (success) {
-            window.location.href = 'https://www.google.com.br/maps/place/' +
+            var mapUrl = 'https://www.google.com.br/maps/place/' +
               address + '/@' + latitude + ',' + longitude;
+
+            $mWebview.open(0, mapUrl, "_system", undefined, "", "", "", "", true);
           }
         });
     };
