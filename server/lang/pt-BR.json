@@ -1,6 +1,6 @@
 {
   "moblet": {
-    "label": "Mapa de múltiplos pontos",
+    "label": "Mapa GPS",
     "hint": "Crie um mapa com uma lista de lugares",
     "description": "Preencha os campos abaixo para criar a página de mapa"
   },

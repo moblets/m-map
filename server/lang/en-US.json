@@ -1,6 +1,6 @@
 {
   "moblet": {
-    "label": "Multipoint Map",
+    "label": "GPS Map",
     "hint": "Create a map with a list of locations",
     "description": "Fill out the form below to create the map page"
   },
