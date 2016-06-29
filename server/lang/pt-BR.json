@@ -21,12 +21,12 @@
   "address": {
     "label": "Endereço",
     "hint": "Endereço exato do lugar",
-    "placeholder": "1062 Lombard St - San Francisco, CA 94133 - EUA",
+    "placeholder": "R. da Cantareira, 306 - Luz, São Paulo - SP, 01103-200",
     "error_address": "Endereço não encontrado"
   },
   "title": {
     "label": "Título",
     "hint": "Título do lugar",
-    "placeholder": "Lombard Street"
+    "placeholder": "Mercado Municipal de São Paulo"
   }
 }
