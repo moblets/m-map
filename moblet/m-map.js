@@ -13,6 +13,8 @@ module.exports = {
   },
   controller: function(
     $scope,
+    $rootScope,
+    $stateParams,
     $mMoblet,
     $mDataLoader,
     $filter,
@@ -155,6 +157,8 @@ module.exports = {
           var locations = mapData.locations;
           var mapDiv = document.getElementById('m-map-' + $scope.moblet.id);
 
+          var mapTypeId = mapData.mapTypeId || 'ROADMAP';
+
           // Set the map options
           var mapOptions = {
             mapTypeControl: mapData.mapTypeControl,
@@ -166,7 +170,7 @@ module.exports = {
               mapData.centerLatitude,
               mapData.centerLongitude
             ),
-            mapTypeId: google.maps.MapTypeId[mapData.mapTypeId]
+            mapTypeId: google.maps.MapTypeId[mapTypeId]
           };
 
           $scope.googleMap = new google.maps.Map(mapDiv, mapOptions);
@@ -207,24 +211,29 @@ module.exports = {
       };
       $mDataLoader.load($scope.moblet, dataLoadOptions)
         .then(function(data) {
-          console.log(data);
+          if (_.isEmpty(data)) {
+            $scope.emptyData = true;
+            $scope.isLoading = false;
+          } else {
+            console.log(data);
           // Put the data from the feed in the $scope object
-          $scope.mapData = data;
+            $scope.mapData = data;
           // Split the screen in two portions. The show list button is 44px
           // and the map will take the remaining portion of the screen.
           // The list and the "show map" botton are set to 0.
-          $scope.mapHeight = screenHeightLessButton();
-          $scope.listHeight = 0;
-          $scope.zoomMapButtonHeight = 0;
-          $scope.zoomListButtonHeight = "44px";
+            $scope.mapHeight = screenHeightLessButton();
+            $scope.listHeight = 0;
+            $scope.zoomMapButtonHeight = 0;
+            $scope.zoomListButtonHeight = "44px";
 
           // Set the Ionic scroll javascript to the list of locations
           // You need to set 'delegate-handle="listMapScroll"' on the
           // HTML
-          $ionicScrollDelegate.$getByHandle('listMapScroll').resize();
+            $ionicScrollDelegate.$getByHandle('listMapScroll').resize();
 
-          findCenter();
-          loadMap();
+            findCenter();
+            loadMap();
+          }
         });
     };
 
@@ -279,6 +288,14 @@ module.exports = {
           }
         });
     };
+
+    var frameEvent = '$uFrameInteractions:refreshPage:moblet_refresh:';
+    frameEvent += $stateParams.pageId;
+    $rootScope.$on(frameEvent, function() {
+      $timeout(function() {
+        init();
+      }, 10);
+    });
 
     init();
   }
