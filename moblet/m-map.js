@@ -215,6 +215,7 @@ module.exports = {
             $scope.emptyData = true;
             $scope.isLoading = false;
           } else {
+            $scope.emptyData = false;
             console.log(data);
           // Put the data from the feed in the $scope object
             $scope.mapData = data;
