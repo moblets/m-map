@@ -290,6 +290,11 @@ module.exports = {
         });
     };
 
+    $rootScope.$on('$uFrameInteractions:ulist:refresh', function() {
+      $timeout(function() {
+        init();
+      }, 10);
+    });
     var frameEvent = '$uFrameInteractions:refreshPage:moblet_refresh:';
     frameEvent += $stateParams.pageId;
     $rootScope.$on(frameEvent, function() {
