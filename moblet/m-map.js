@@ -283,9 +283,8 @@ module.exports = {
         .then(function(success) {
           if (success) {
             var mapUrl = $scope.getExternalMapLink(key);
-            $mWebview.open(
-              0, mapUrl, "_blank", undefined, "olar", "#ff0000", "", "", false
-            );
+            $mWebview
+              .open(0, mapUrl, "_system", undefined, "", "", "", "", false);
           }
         });
     };
