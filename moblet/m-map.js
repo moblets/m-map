@@ -8,22 +8,22 @@ module.exports = {
     en: "lang/en-US.json"
   },
   link: function() {
-    $uInjector.inject('http://maps.google.com/maps/api/js' +
+    $mInjector.inject('http://maps.google.com/maps/api/js' +
       '?key=AIzaSyDNzstSiq9llIK8b49En0dT-yFA5YpManU&amp;sensor=true');
   },
   controller: function(
     $scope,
     $rootScope,
     $stateParams,
-    $mMoblet,
-    $mDataLoader,
     $filter,
     $ionicScrollDelegate,
-    $uAlert,
     $timeout,
+    $mMoblet,
+    $mDataLoader,
+    $mAlert,
     $mFrameSize,
     $mWebview,
-    $uPlatform
+    $mPlatform
   ) {
     /**
      * Find the center of the map based on the locations.
@@ -216,7 +216,6 @@ module.exports = {
             $scope.isLoading = false;
           } else {
             $scope.emptyData = false;
-            console.log(data);
           // Put the data from the feed in the $scope object
             $scope.mapData = data;
           // Split the screen in two portions. The show list button is 44px
@@ -260,7 +259,7 @@ module.exports = {
       $ionicScrollDelegate.$getByHandle('listMapScroll').resize();
     };
 
-    $scope.iOsStandalone = $uPlatform.isIOS() && window.navigator.standalone;
+    $scope.iOsStandalone = $mPlatform.isIOS() && window.navigator.standalone;
 
     $scope.getExternalMapLink = function(key) {
       var address = $scope.mapData.locations[key].address;
@@ -272,7 +271,7 @@ module.exports = {
     };
 
     $scope.openLocation = function(key) {
-      $uAlert.dialog(
+      $mAlert.dialog(
         $filter('translate')("open_in_map_app_title"),
         $filter('translate')("open_in_map_app_message"),
         [
