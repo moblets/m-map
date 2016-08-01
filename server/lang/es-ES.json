@@ -1,0 +1,32 @@
+{
+  "moblet": {
+    "label": "Título",
+    "hint": "Título del lugar",
+    "description": "Rellene el siguiente formulario para crear la página del mapa",
+  },
+  "mapTypeId": {
+    "label": "Tipo de mapa",
+    "hint": "Escoja el tipo de mapa",
+    "default": "Escoja un tipo",
+    "roadmap": "Calles",
+    "satelite": "Satélite",
+    "hybrid": "Híbrido",
+    "terrain": "Terreno"
+  },
+  "locations": {
+    "label": "Lista de lugares",
+    "hint": "Introduzca los lugares deseados",
+    "list_button": "Añadir lugares"
+  },
+  "address": {
+    "label": "Dirección",
+    "hint": "Dirección exacta del lugar",
+    "placeholder": "Calle Gran Vía, 1, 28013 Madrid, España",
+    "error_address": "Dirección no encontrada"
+  },
+  "title": {
+    "label": "Título",
+    "hint": "Título del lugar",
+    "placeholder": "Gran Vía"
+  }
+}
