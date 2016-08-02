@@ -2,7 +2,7 @@
   "moblet": {
     "label": "Título",
     "hint": "Título del lugar",
-    "description": "Rellene el siguiente formulario para crear la página del mapa",
+    "description": "Rellene el siguiente formulario para crear la página del mapa"
   },
   "mapTypeId": {
     "label": "Tipo de mapa",
