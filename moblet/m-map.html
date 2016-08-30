@@ -1,4 +1,5 @@
 <m-moblet is-loading="isLoading" init="init" inner-scroll="true" unavaliable="error" no-content="emptyData">
+  <m-content has-bouncing="false" scroll="false">
   <div id="wraper">
     <div id="zoom-map" class="zoom-button" ng-style="{'height':zoomMapButtonHeight}" ng-click="zoomMap()">
       <div class="zoom-buttom-wraper" ng-style="{'height':zoomMapButtonHeight}">
@@ -30,4 +31,5 @@
       </div>
     </ion-scroll>
   </div>
+</m-content>
 </m-moblet>
