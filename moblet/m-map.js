@@ -8,7 +8,7 @@ module.exports = {
     en: "lang/en-US.json"
   },
   link: function() {
-    var gmapsUrl = 'https://maps.google.com/maps/api/js' +
+    var gmapsUrl = 'http://maps.google.com/maps/api/js' +
       '?key=AIzaSyDNzstSiq9llIK8b49En0dT-yFA5YpManU&amp;sensor=true';
     $mInjector.inject(gmapsUrl);
   },
