@@ -1,7 +1,7 @@
 /* eslint no-undef: [0]*/
 module.exports = {
   title: "mMap",
-  style: "m-map.scss",
+  style: "m-map.less",
   template: 'm-map.html',
   i18n: {
     pt: "lang/pt-BR.json",
