@@ -154,7 +154,7 @@ module.exports = {
           $scope.googleMap = google;
           var mapData = $scope.mapData;
           var locations = mapData.locations;
-          var mapDiv = document.getElementById('m-map-' + $scope.moblet.id);
+          var mapDiv = document.getElementById('m-map-' + $scope.moblet.instance.id);
 
           var mapTypeId = mapData.mapTypeId || 'ROADMAP';
 
@@ -191,7 +191,7 @@ module.exports = {
                 zoomButtons[z].className += ' animate';
               }
               document
-                .getElementById('m-map-' + $scope.moblet.id)
+                .getElementById('m-map-' + $scope.moblet.instance.id)
                 .className = 'animate';
               document
                 .getElementById('m-map-list')
