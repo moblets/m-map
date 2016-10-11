@@ -18,7 +18,6 @@ module.exports = {
     $filter,
     $ionicScrollDelegate,
     $timeout,
-    $mMoblet,
     $mDataLoader,
     $mAlert,
     $mFrameSize,
@@ -205,7 +204,6 @@ module.exports = {
 
     var init = function() {
       $scope.isLoading = true;
-      $scope.moblet = $mMoblet.load();
       dataLoadOptions = {
         cache: false
       };
