@@ -280,6 +280,7 @@ module.exports = {
         .then(function(success) {
           if (success) {
             var mapUrl = $scope.getExternalMapLink(key);
+            mapUrl = encodeURI(mapUrl);
             $mWebview
               .open(0, mapUrl, "_system", undefined, "", "", "", "", false);
           }
