@@ -25,10 +25,10 @@
     "error_address": "Address not found"
   },
   "latlng": {
-    "label": "LatLng (optional)",
+    "label": "Coordinates (optional)",
     "hint": "Exact latitude and longitude",
     "placeholder": "-23.5488023,-46.3751356",
-    "error_latlng": "LatLng not found. Please, fill like the example"
+    "error_latlng": "Coordinates not found. Please, fill like the example"
   },
   "title": {
     "label": "Title",

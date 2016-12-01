@@ -25,10 +25,10 @@
     "error_address": "Endereço não encontrado"
   },
   "latlng": {
-    "label": "LatLng (opcional)",
+    "label": "Coordenadas (opcional)",
     "hint": "Latitude e longitude exata do lugar",
     "placeholder": "-23.5488023,-46.3751356",
-    "error_latlng": "LatLng não encontrada. Preencha como no exemplo"
+    "error_latlng": "Coordenadas não encontrada. Preencha como no exemplo"
   },
   "title": {
     "label": "Título",

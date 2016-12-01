@@ -25,10 +25,10 @@
     "error_address": "Dirección no encontrada"
   },
   "latlng": {
-    "label": "LatLng (opcional)",
+    "label": "Coordenadas (opcional)",
     "hint": "Latitud y longitud exactas",
     "placeholder": "-23.5488023,-46.3751356",
-    "error_latlng": "LatLng no encontrado. Por favor, rellena como el ejemplo"
+    "error_latlng": "Coordenadas no encontradas. Por favor, rellena como el ejemplo"
   },
   "title": {
     "label": "Título",
