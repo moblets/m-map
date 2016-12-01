@@ -22,7 +22,7 @@
     "label": "Dirección",
     "hint": "Dirección exacta del lugar",
     "placeholder": "Calle Gran Vía, 1, 28013 Madrid, España",
-    "error_address": "Dirección no encontrada"
+    "error_address": "Dirección no encontrada",
     "no_address": "Dirección o LatLng necesitan ser llenados"
   },
   "latlng": {
