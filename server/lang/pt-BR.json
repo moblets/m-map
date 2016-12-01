@@ -23,14 +23,12 @@
     "hint": "Endereço exato do lugar",
     "placeholder": "R. da Cantareira, 306 - Luz, São Paulo - SP, 01103-200",
     "error_address": "Endereço não encontrado",
-    "no_address": "Endereço ou LatLng precisam ser preenchidos"
   },
   "latlng": {
     "label": "LatLng (opcional)",
     "hint": "Latitude e longitude exata do lugar",
     "placeholder": "-23.5488023,-46.3751356",
-    "error_latlng": "LatLng não encontrada. Preencha como no exemplo",
-    "no_latlng": "Endereço ou LatLng precisam ser preenchidos"
+    "error_latlng": "LatLng não encontrada. Preencha como no exemplo"
   },
   "title": {
     "label": "Título",

@@ -14,6 +14,7 @@
         {
           "name": "address",
           "type": "text",
+          "required": true,
           "max-length": 255
         },
         {

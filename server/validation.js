@@ -16,41 +16,33 @@ module.exports = {
     var searchType = '';
     var searchTerm = '';
 
-    if (location.address === '' && location.latlng === '') {
-      response = {
-        errors: {
-          address: 'no_address',
-          latlng: 'no_latlng'
-        }
-      };
-      callback(valid, response);
+    // If LatLng is not filled, use the address to search the location
+    if (location.latlng === '') {
+      searchType = 'address';
+      searchTerm = encodeURIComponent(location.address);
+    // If it's filled, check if the LatLng exists
     } else {
-      if (location.address === '') {
-        searchType = 'latlng';
-        searchTerm = location.latlng;
-      } else {
-        searchType = 'address';
-        searchTerm = encodeURIComponent(location.address);
-      }
-    // "Rua James Watt, 84 - são paulo - sp"
-      getGoogleMapsData(searchTerm, searchType, function(mapData) {
-      // console.log(mapData);
-        if (mapData.status === 'OK') {
-          valid = true;
-          response = {
-            data: {
-              latitude: mapData.results[0].geometry.location.lat,
-              longitude: mapData.results[0].geometry.location.lng
-            }
-          };
-        } else {
-          valid = false;
-          response.errors = {};
-          response.errors[searchType] = 'error_' + searchType;
-        }
-        callback(valid, response);
-      });
+      searchType = 'latlng';
+      searchTerm = encodeURIComponent(location.latlng);
     }
+    // "Rua James Watt, 84 - são paulo - sp"
+    getGoogleMapsData(searchTerm, searchType, function(mapData) {
+      // console.log(mapData);
+      if (mapData.status === 'OK') {
+        valid = true;
+        response = {
+          data: {
+            latitude: mapData.results[0].geometry.location.lat,
+            longitude: mapData.results[0].geometry.location.lng
+          }
+        };
+      } else {
+        valid = false;
+        response.errors = {};
+        response.errors[searchType] = 'error_' + searchType;
+      }
+      callback(valid, response);
+    });
   }
 };
 
