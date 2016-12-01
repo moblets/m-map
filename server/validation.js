@@ -16,9 +16,10 @@ module.exports = {
     var searchType = '';
     var searchTerm = '';
 
-    console.log(location.latlng);
     // If LatLng is not filled, use the address to search the location
-    if (location.latlng === '') {
+    if (location.latlng === '' ||
+        location.latlng === undefined ||
+        location.latlng === null) {
       searchType = 'address';
       searchTerm = encodeURIComponent(location.address);
     // If it's filled, check if the LatLng exists
