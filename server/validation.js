@@ -13,8 +13,26 @@ module.exports = {
   locations: function(location, callback) {
     var valid = false;
     var response = {};
+    var searchType = '';
+    var searchTerm = '';
+
+    if (location.address === undefined && location.latlng === undefined) {
+      response = {
+        errors: {
+          address: 'no_address',
+          latlng: 'no_latlng'
+        }
+      };
+      callback(valid, response);
+    } else if (location.address === undefined) {
+      searchType = 'latlng';
+      searchTerm = location.latlng;
+    } else {
+      searchType = 'address';
+      searchTerm = encodeURIComponent(location.address);
+    }
     // "Rua James Watt, 84 - são paulo - sp"
-    getGoogleMapsData(location.address, function(mapData) {
+    getGoogleMapsData(searchTerm, searchType, function(mapData) {
       // console.log(mapData);
       if (mapData.status === 'OK') {
         valid = true;
@@ -26,11 +44,7 @@ module.exports = {
         };
       } else {
         valid = false;
-        response = {
-          errors: {
-            address: 'error_address'
-          }
-        };
+        response.errors[searchType] = 'error_' + searchType;
       }
       callback(valid, response);
     });
@@ -39,16 +53,16 @@ module.exports = {
 
 /**
  * Get Google Maps data for a given address
- * @param  {String}   address  The address
+ * @param  {String}   searchTerm  The term to be searched
+ * @param  {String}   searchType  The type of the search (address or latlng)
  * @param  {Function} callback callback function that will receive the Google
  * Maps response as an Object
  */
-function getGoogleMapsData(address, callback) {
+function getGoogleMapsData(searchTerm, searchType, callback) {
   var http = require('http');
   var response = '';
   var host = 'http://maps.googleapis.com/maps/api/geocode/json' +
-  '?sensor=false&address=' +
-  encodeURIComponent(address);
+  '?sensor=false&' + searchType + '=' + searchTerm;
 
   http.get(host, function(res) {
     res
