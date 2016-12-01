@@ -35,7 +35,9 @@ module.exports = {
         response = {
           data: {
             latitude: mapData.results[0].geometry.location.lat,
-            longitude: mapData.results[0].geometry.location.lng
+            longitude: mapData.results[0].geometry.location.lng,
+            searchTerm: searchTerm,
+            searchType: searchType
           }
         };
       } else {
