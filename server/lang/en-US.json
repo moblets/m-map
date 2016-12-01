@@ -22,7 +22,15 @@
     "label": "Address",
     "hint": "The exact address of the location",
     "placeholder": "1062 Lombard St - San Francisco, CA 94133 - EUA",
-    "error_address": "Address not found"
+    "error_address": "Address not found",
+    "no_address": "Address or LatLng must be filled"
+  },
+  "latlng": {
+    "label": "LatLng (optional)",
+    "hint": "Exact latitude and longitude",
+    "placeholder": "-23.5488023,-46.3751356",
+    "error_latlng": "LatLng not found. Please, fill like the example",
+    "no_latlng": "Address or LatLng must be filled"
   },
   "title": {
     "label": "Title",
