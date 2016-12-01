@@ -16,6 +16,7 @@ module.exports = {
     var searchType = '';
     var searchTerm = '';
 
+    console.log(location);
     // If LatLng is not filled, use the address to search the location
     if (location.latlng === '') {
       searchType = 'address';
