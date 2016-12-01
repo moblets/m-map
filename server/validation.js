@@ -47,6 +47,7 @@ module.exports = {
           longitude: latLng[1]
         }
       };
+      callback(valid, response);
     }
   }
 };
