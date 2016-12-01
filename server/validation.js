@@ -25,7 +25,7 @@ module.exports = {
     // If it's filled, check if the LatLng exists
     } else {
       searchType = 'latlng';
-      searchTerm = encodeURIComponent(location.latlng);
+      searchTerm = location.latlng;
     }
     // "Rua James Watt, 84 - são paulo - sp"
     getGoogleMapsData(searchTerm, searchType, function(mapData) {
@@ -35,9 +35,7 @@ module.exports = {
         response = {
           data: {
             latitude: mapData.results[0].geometry.location.lat,
-            longitude: mapData.results[0].geometry.location.lng,
-            searchTerm: searchTerm,
-            searchType: searchType
+            longitude: mapData.results[0].geometry.location.lng
           }
         };
       } else {
