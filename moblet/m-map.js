@@ -184,7 +184,7 @@ module.exports = {
           // Remove the Moblets loader after the map finish loading
           $scope.googleMap.addListener('idle', function() {
             $timeout(function() {
-              $scope.isLoading = false;
+              $scope.moblet.isLoading = false;
               var zoomButtons = document
                 .getElementsByClassName('zoom-button');
               for (var z = 0; z < zoomButtons.length; z++) {
@@ -203,17 +203,17 @@ module.exports = {
     };
 
     var init = function() {
-      $scope.isLoading = true;
+      $scope.moblet.isLoading = true;
       dataLoadOptions = {
         cache: false
       };
       $mDataLoader.load($scope.moblet, dataLoadOptions)
         .then(function(data) {
           if (_.isEmpty(data)) {
-            $scope.emptyData = true;
-            $scope.isLoading = false;
+            $scope.moblet.noContent = true;
+            $scope.moblet.isLoading = false;
           } else {
-            $scope.emptyData = false;
+            $scope.moblet.noContent = false;
           // Put the data from the feed in the $scope object
             $scope.mapData = data;
           // Split the screen in two portions. The show list button is 44px
