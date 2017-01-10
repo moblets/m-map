@@ -15,7 +15,11 @@
           "name": "address",
           "type": "text",
           "required": true,
-          "min-length": 3,
+          "max-length": 255
+        },
+        {
+          "name": "latlng",
+          "type": "text",
           "max-length": 255
         }
       ]

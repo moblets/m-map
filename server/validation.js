@@ -13,33 +13,48 @@ module.exports = {
   locations: function(location, callback) {
     var valid = false;
     var response = {};
-    // "Rua James Watt, 84 - são paulo - sp"
-    getGoogleMapsData(location.address, function(mapData) {
-      // console.log(mapData);
-      if (mapData.status === 'OK') {
-        valid = true;
-        response = {
-          data: {
-            latitude: mapData.results[0].geometry.location.lat,
-            longitude: mapData.results[0].geometry.location.lng
-          }
-        };
-      } else {
-        valid = false;
-        response = {
-          errors: {
-            address: 'error_address'
-          }
-        };
-      }
+
+    // If LatLng is not filled, use the address to search the location
+    if (location.latlng === '' ||
+        location.latlng === undefined ||
+        location.latlng === null) {
+      // "Rua James Watt, 84 - são paulo - sp"
+      getGoogleMapsData(location.address, function(mapData) {
+        // console.log(mapData);
+        if (mapData.status === 'OK') {
+          valid = true;
+          response = {
+            data: {
+              latitude: mapData.results[0].geometry.location.lat,
+              longitude: mapData.results[0].geometry.location.lng
+            }
+          };
+        } else {
+          valid = false;
+          response.errors = {};
+          response.errors.address = 'error_address';
+        }
+        callback(valid, response);
+      });
+
+    // If it's filled, check if the LatLng exists
+    } else {
+      var latLng = location.latlng.split(',');
+      valid = true;
+      response = {
+        data: {
+          latitude: latLng[0],
+          longitude: latLng[1]
+        }
+      };
       callback(valid, response);
-    });
+    }
   }
 };
 
 /**
  * Get Google Maps data for a given address
- * @param  {String}   address  The address
+ * @param  {String}   address  The address to be searched
  * @param  {Function} callback callback function that will receive the Google
  * Maps response as an Object
  */
@@ -47,8 +62,7 @@ function getGoogleMapsData(address, callback) {
   var http = require('http');
   var response = '';
   var host = 'http://maps.googleapis.com/maps/api/geocode/json' +
-  '?sensor=false&address=' +
-  encodeURIComponent(address);
+  '?sensor=false&address=' + address;
 
   http.get(host, function(res) {
     res
