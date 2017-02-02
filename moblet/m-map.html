@@ -1,35 +1,34 @@
-<!--<m-moblet is-loading="isLoading" init="init" inner-scroll="true" unavaliable="error" no-content="emptyData">
-  <m-content has-bouncing="false" scroll="false">-->
-  <div id="wraper">
-    <div id="zoom-map" class="zoom-button" ng-style="{'height':zoomMapButtonHeight}" ng-click="zoomMap()">
-      <div class="zoom-buttom-wraper" ng-style="{'height':zoomMapButtonHeight}">
-        <p translate="zoom_map"></p>
-        <i class="icon ion-chevron-down"></i>
-      </div>
+
+<div id="wraper">
+  <div id="zoom-map" ng-style="{'height':zoomMapButtonHeight}" ng-click="zoomMap()">
+     <div class="action-buttom m-theme-title-color" ng-style="{'height':zoomListButtonHeight}">
+      <i class="icon ion-chevron-down"></i>
+      <p translate="zoom_map"  ng-style="{'height':zoomListButtonHeight}" class="m-theme-title-color">
     </div>
-    <div id="m-map-{{moblet.instance.id}}"ng-click="zoomMap()" ng-style="{'height':mapHeight}"></div>
-    <div id="zoom-list" class="zoom-button" ng-style="{'height':zoomListButtonHeight}" ng-click="zoomList()">
-      <div class="zoom-buttom-wraper" ng-style="{'height':zoomListButtonHeight}">
-        <i class="icon ion-chevron-up"></i>
-        <p translate="zoom_list">
-      </div>
-    </div>
-    <ion-scroll id="m-map-list" overflow-scroll="false" direction="y" delegate-handle="listMapScroll" ng-style="{'height':listHeight}" ng-click="zoomList()">
-      <div class="list">
-          <div class="item item-icon-right" ng-repeat="(key, location) in mapData.locations">
-            <h2>{{location.title}}</h2>
-            <p>{{location.address}}</p>
-            <div ng-if="iOsStandalone">
-              <a ng-href="{{ getExternalMapLink(key) }}" target="_blank">
-                <i class="icon ion-ios-navigate"></i>
-              </a>
-            </div>
-            <div ng-if="!iOsStandalone">
-              <i class="icon ion-ios-navigate" ng-click="openLocation(key)"></i>
-            </div>
-          </div>
-      </div>
-    </ion-scroll>
   </div>
-<!--</m-content>
-</m-moblet>-->
+  <div id="m-map-{{moblet.instance.id}}"ng-click="zoomMap()" ng-style="{'height':mapHeight}"></div>
+  <div id="zoom-list" class="m-theme-primary-bg" ng-style="{'height':zoomListButtonHeight}" ng-click="zoomList()">
+    <div class="action-buttom m-theme-title-color" ng-style="{'height':zoomListButtonHeight}">
+      <i class="icon ion-chevron-up m-theme-title-color"></i>
+      <p translate="zoom_list"  ng-style="{'height':zoomListButtonHeight}" class="m-theme-title-color">
+    </div>
+  </div>
+  <!--<ion-scroll id="m-map-list" overflow-scroll="false" direction="y" delegate-handle="listMapScroll" ng-style="{'height':listHeight}" ng-click="zoomList()">-->
+   <div id="m-map-list">
+    <div class="list">
+        <div class="item item-icon-right" ng-repeat="(key, location) in mapData.locations">
+          <h2 ng-click="zoomMap()">{{location.title}}</h2 >
+          <p ng-click="zoomMap()">{{location.address}}</p>
+          <div ng-if="iOsStandalone">
+            <a ng-href="{{ getExternalMapLink(key) }}" target="_blank">
+              <i class="icon ion-ios-navigate"></i>
+            </a>
+          </div>
+          <div ng-if="!iOsStandalone">
+            <i class="icon ion-ios-navigate" ng-click="openLocation(key)"></i>
+          </div>
+        </div>
+    </div>
+  </div>
+  <!--</ion-scroll>-->
+</div>

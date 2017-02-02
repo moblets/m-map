@@ -216,18 +216,18 @@ module.exports = {
             $scope.moblet.noContent = false;
           // Put the data from the feed in the $scope object
             $scope.mapData = data;
-          // Split the screen in two portions. The show list button is 44px
+          // Split the screen in two portions. The show list button is 49px
           // and the map will take the remaining portion of the screen.
           // The list and the "show map" botton are set to 0.
             $scope.mapHeight = screenHeightLessButton();
             $scope.listHeight = 0;
             $scope.zoomMapButtonHeight = 0;
-            $scope.zoomListButtonHeight = "44px";
+            $scope.zoomListButtonHeight = "49px";
 
           // Set the Ionic scroll javascript to the list of locations
           // You need to set 'delegate-handle="listMapScroll"' on the
           // HTML
-            $ionicScrollDelegate.$getByHandle('listMapScroll').resize();
+            // $ionicScrollDelegate.$getByHandle('listMapScroll').resize();
 
             findCenter();
             loadMap();
@@ -241,9 +241,9 @@ module.exports = {
     $scope.zoomList = function() {
       $scope.mapHeight = 0;
       $scope.listHeight = screenHeightLessButton();
-      $scope.zoomMapButtonHeight = "44px";
+      $scope.zoomMapButtonHeight = "49px";
       $scope.zoomListButtonHeight = 0;
-      $ionicScrollDelegate.$getByHandle('listMapScroll').resize();
+      // $ionicScrollDelegate.$getByHandle('listMapScroll').resize();
     };
 
     /**
@@ -253,7 +253,7 @@ module.exports = {
       $scope.mapHeight = screenHeightLessButton();
       $scope.listHeight = 0;
       $scope.zoomMapButtonHeight = 0;
-      $scope.zoomListButtonHeight = "44px";
+      $scope.zoomListButtonHeight = "49px";
       $ionicScrollDelegate.$getByHandle('listMapScroll').resize();
     };
 
