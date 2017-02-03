@@ -8,6 +8,7 @@ module.exports = {
     en: "lang/en-US.json"
   },
   link: function() {
+    $mInjector.inject('https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js');
     $mInjector.inject('http://maps.google.com/maps/api/js' +
         '?key=AIzaSyDNzstSiq9llIK8b49En0dT-yFA5YpManU&amp;sensor=true');
   },
@@ -73,6 +74,7 @@ module.exports = {
      */
     var addMarkers = function(locations) {
       // Add the pins
+      var markers = [];
       for (var j = 0; j < locations.length; j++) {
         var infoWindow = new google.maps.InfoWindow();
         var marker = new google.maps.Marker(
@@ -85,6 +87,7 @@ module.exports = {
             animation: google.maps.Animation.DROP
           }
         );
+        markers.push(marker);
         // Add the pins content
         google.maps.event.addListener(
           marker,
@@ -92,6 +95,9 @@ module.exports = {
           markerListener(infoWindow, marker, locations[j])
         );
       }
+      var markerCluster = new MarkerClusterer($scope.googleMap, markers,
+         {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'}
+         );
     };
 
     /**
@@ -137,9 +143,9 @@ module.exports = {
      * should use
      * @return {String}        The height in pixels with "px" in the end
      */
-    var screenHeightLessButton = function() {
+    var screenHeightLessButton = function(variant) {
       var height = parseInt($mFrameSize.height(), 10);
-      return (height - 44) + "px";
+      return (height - 44) + (variant || 0) + "px";
     };
 
     var loadMap = function() {
@@ -185,6 +191,7 @@ module.exports = {
           $scope.googleMap.addListener('idle', function() {
             $timeout(function() {
               $scope.moblet.isLoading = false;
+
               var zoomButtons = document
                 .getElementsByClassName('zoom-button');
               for (var z = 0; z < zoomButtons.length; z++) {
@@ -219,9 +226,9 @@ module.exports = {
           // Split the screen in two portions. The show list button is 49px
           // and the map will take the remaining portion of the screen.
           // The list and the "show map" botton are set to 0.
+            $scope.contentHeight = screenHeightLessButton(49);
             $scope.mapHeight = screenHeightLessButton();
             $scope.listHeight = 0;
-            $scope.zoomMapButtonHeight = 0;
             $scope.zoomListButtonHeight = "49px";
 
           // Set the Ionic scroll javascript to the list of locations
@@ -239,10 +246,11 @@ module.exports = {
      * Focus and expand the list of locations
      */
     $scope.zoomList = function() {
+      $scope.listZooned = true;
       $scope.mapHeight = 0;
-      $scope.listHeight = screenHeightLessButton();
-      $scope.zoomMapButtonHeight = "49px";
-      $scope.zoomListButtonHeight = 0;
+      $scope.listHeight = "auto";
+      // $scope.zoomMapButtonHeight = "49px";
+      // $scope.zoomListButtonHeight = 0;
       // $ionicScrollDelegate.$getByHandle('listMapScroll').resize();
     };
 
@@ -250,11 +258,20 @@ module.exports = {
      * Focus and expand the map
      */
     $scope.zoomMap = function() {
+      $scope.listZooned = false;
       $scope.mapHeight = screenHeightLessButton();
       $scope.listHeight = 0;
-      $scope.zoomMapButtonHeight = 0;
-      $scope.zoomListButtonHeight = "49px";
-      $ionicScrollDelegate.$getByHandle('listMapScroll').resize();
+      // $scope.zoomMapButtonHeight = 0;
+      // $scope.zoomListButtonHeight = "49px";
+      // $ionicScrollDelegate.$getByHandle('listMapScroll').resize();
+    };
+
+    $scope.zoomToogle = function() {
+      if ($scope.listZooned) {
+        $scope.zoomMap();
+      } else {
+        $scope.zoomList();
+      }
     };
 
     $scope.iOsStandalone = $mPlatform.isIOS() && window.navigator.standalone;

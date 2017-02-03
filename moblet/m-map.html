@@ -1,20 +1,22 @@
 
 <div id="wraper">
-  <div id="zoom-map" ng-style="{'height':zoomMapButtonHeight}" ng-click="zoomMap()">
+  <!--<div id="zoom-map" ng-style="{'height':zoomMapButtonHeight}" ng-click="zoomMap()">
      <div class="action-buttom m-theme-title-color" ng-style="{'height':zoomListButtonHeight}">
       <i class="icon ion-chevron-down"></i>
       <p translate="zoom_map"  ng-style="{'height':zoomListButtonHeight}" class="m-theme-title-color">
     </div>
-  </div>
-  <div id="m-map-{{moblet.instance.id}}"ng-click="zoomMap()" ng-style="{'height':mapHeight}"></div>
-  <div id="zoom-list" class="m-theme-primary-bg" ng-style="{'height':zoomListButtonHeight}" ng-click="zoomList()">
-    <div class="action-buttom m-theme-title-color" ng-style="{'height':zoomListButtonHeight}">
-      <i class="icon ion-chevron-up m-theme-title-color"></i>
-      <p translate="zoom_list"  ng-style="{'height':zoomListButtonHeight}" class="m-theme-title-color">
+  </div>-->
+  <div id="m-map-{{moblet.instance.id}}" ng-style="{'height':mapHeight}"></div>
+  <div id="zoom-list" class="m-theme-primary-bg" ng-style="{'height':zoomListButtonHeight}"  ng-click="zoomToogle()">
+    <div class="action-buttom m-theme-title-color" ng-style="{'height':zoomListButtonHeight}" ng-class="{'listed':listZooned}">
+      <i class="icon ion-chevron-up m-theme-title-color" ng-if="!listZooned"></i>
+      <i class="icon ion-chevron-down m-theme-title-color" ng-if="listZooned"></i>
+      <p translate="zoom_list"  ng-style="{'height':zoomListButtonHeight}" ng-if="!listZooned" class="m-theme-title-color"></p>
+      <p translate="zoom_map"  ng-style="{'height':zoomListButtonHeight}"  ng-if="listZooned" class="m-theme-title-color"></p>
+      
     </div>
   </div>
-  <!--<ion-scroll id="m-map-list" overflow-scroll="false" direction="y" delegate-handle="listMapScroll" ng-style="{'height':listHeight}" ng-click="zoomList()">-->
-   <div id="m-map-list">
+   <div id="m-map-list" ng-style="{'height':listHeight}" >
     <div class="list">
         <div class="item item-icon-right" ng-repeat="(key, location) in mapData.locations">
           <h2 ng-click="zoomMap()">{{location.title}}</h2 >
@@ -30,5 +32,4 @@
         </div>
     </div>
   </div>
-  <!--</ion-scroll>-->
 </div>

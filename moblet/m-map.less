@@ -12,6 +12,11 @@ m-map {
   #zoom-list {
     border-top-width: 1px;
   }
+
+  #m-map-list{
+      overflow: hidden;
+      transition: all 0.5s ease-in-out;
+  }
   .marker  {
     h1 {
       font-size: 16px;
@@ -45,7 +50,19 @@ m-map {
       width: 100vw;
       font-weight: 500;
       padding-top: 16px;
+      padding-bottom: 0px;
       text-align: center;
+    }
+    &.listed{
+      p{
+       
+        padding-top: 0px;
+        padding-bottom: 16px;
+       
+      }
+      i{
+        margin-top: 26px;
+      }
     }
   }
   .zoom-button {
