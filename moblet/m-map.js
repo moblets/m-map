@@ -260,7 +260,9 @@ module.exports = {
     $scope.zoomMap = function() {
       $scope.listZooned = false;
       $scope.mapHeight = screenHeightLessButton();
-      $scope.listHeight = 0;
+      $timeout(function() {
+        $scope.listHeight = 0;
+      }, 500);
       // $scope.zoomMapButtonHeight = 0;
       // $scope.zoomListButtonHeight = "49px";
       // $ionicScrollDelegate.$getByHandle('listMapScroll').resize();
