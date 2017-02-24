@@ -151,7 +151,7 @@ module.exports = {
     var loadMap = function() {
       $timeout(function() {
         // Wait until 'maps api' has been injected
-        if (typeof google === "undefined") {
+        if (typeof google === "undefined" && typeof markerclusterer === "undefined") {
           loadMap();
         } else {
           // Find and set user location
