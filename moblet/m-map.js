@@ -9,7 +9,7 @@ module.exports = {
   },
   link: function() {
     $mInjector.inject('https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js');
-    $mInjector.inject('http://maps.google.com/maps/api/js' +
+    $mInjector.inject('https://maps.google.com/maps/api/js' +
         '?key=AIzaSyDNzstSiq9llIK8b49En0dT-yFA5YpManU&amp;sensor=true');
   },
   controller: function(
