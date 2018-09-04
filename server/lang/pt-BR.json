@@ -34,5 +34,10 @@
     "label": "Título",
     "hint": "Título do lugar",
     "placeholder": "Mercado Municipal de São Paulo"
+  },
+  "userApiKey": {
+    "label": "Google maps chave de API.",
+    "hint": "Google maps chave de API. https://suporte.fabricadeaplicativos.com.br/hc/pt-br",
+    "error_address": "Chave inválida"
   }
 }
