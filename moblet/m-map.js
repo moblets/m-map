@@ -8,9 +8,10 @@ module.exports = {
     en: "lang/en-US.json"
   },
   link: function() {
+    console.log('REGISTERED API KEY:(' + $scope.mapData.userApiKey + ')');
+
     $mInjector.inject('https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js');
-    $mInjector.inject('https://maps.google.com/maps/api/js' +
-        '?key=AIzaSyAElFflv-vOQH-qdFMYcpeM-rIZqviBzQg&amp;sensor=true');
+    $mInjector.inject('https://maps.google.com/maps/api/js?key=' + $scope.mapData.userApiKey + '&amp;sensor=true');
   },
   controller: function(
     $scope,
