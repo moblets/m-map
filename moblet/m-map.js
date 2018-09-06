@@ -237,7 +237,15 @@ module.exports = {
           // HTML
             // $ionicScrollDelegate.$getByHandle('listMapScroll').resize();
 
-            console.log('REGISTERED API KEY:(' + $scope.mapData.userApiKey + ')');
+            if (userApiKey in $scope.mapData){
+              if (! $scope.mapData.userApiKey) {
+                console.log("MOBLET MAPA GPS - CHAVE VAZIA.");
+                //defaults to our key, opens a development darkened map, instead a grey screen error
+                $scope.mapData.userApiKey = "AIzaSyAElFflv-vOQH-qdFMYcpeM-rIZqviBzQg";
+              }
+            }else{
+              $scope.mapData.userApiKey = "AIzaSyAElFflv-vOQH-qdFMYcpeM-rIZqviBzQg";
+            }
 
             $mInjector.inject('https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js');
             $mInjector.inject('https://maps.google.com/maps/api/js?key=' + $scope.mapData.userApiKey + '&amp;sensor=true');
