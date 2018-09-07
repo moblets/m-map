@@ -241,10 +241,10 @@ module.exports = {
               if (! $scope.mapData.userApiKey) {
                 console.log("MOBLET MAPA GPS - CHAVE VAZIA.");
                 //defaults to our key, opens a development darkened map, instead a grey screen error
-                $scope.mapData.userApiKey = "AIzaSyAElFflv-vOQH-qdFMYcpeM-rIZqviBzQg";
+                $scope.mapData.userApiKey = "AIzaSyDNzstSiq9llIK8b49En0dT-yFA5YpManU";
               }
             }else{
-              $scope.mapData.userApiKey = "AIzaSyAElFflv-vOQH-qdFMYcpeM-rIZqviBzQg";
+              $scope.mapData.userApiKey = "AIzaSyDNzstSiq9llIK8b49En0dT-yFA5YpManU";
             }
 
             $mInjector.inject('https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js');
