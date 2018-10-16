@@ -34,5 +34,10 @@
     "label": "Title",
     "hint": "The title of the location",
     "placeholder": "Lombard Street"
+  },
+  "userApiKey": {
+    "label": "Google maps API key.",
+    "hint": "Google maps chave de API. https://developers.google.com/maps/documentation/javascript/get-api-key",
+    "error_address": "Invalid API key"
   }
 }
