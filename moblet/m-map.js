@@ -7,13 +7,13 @@ module.exports = {
     pt: "lang/pt-BR.json",
     en: "lang/en-US.json"
   },
-  link: function() {
+  link: function () {
     // console.log('REGISTERED API KEY:(' + $scope.mapData.userApiKey + ')');
 
     // $mInjector.inject('https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js');
     // $mInjector.inject('https://maps.google.com/maps/api/js?key=' + $scope.mapData.userApiKey + '&amp;sensor=true');
   },
-  controller: function(
+  controller: function (
     $scope,
     $rootScope,
     $stateParams,
@@ -30,7 +30,7 @@ module.exports = {
      * Find the center of the map based on the locations.
      * Get the 4 most extree points and fix it's center
      */
-    var findCenter = function() {
+    var findCenter = function () {
       var locations = $scope.mapData.locations;
       var longitudeMin = Number(locations[0].longitude);
       var latitudeMin = Number(locations[0].latitude);
@@ -59,8 +59,8 @@ module.exports = {
       $scope.mapData.centerLatitude = (latitudeMax + latitudeMin) / 2;
     };
 
-    var markerListener = function(infoWindow, marker, location) {
-      return function() {
+    var markerListener = function (infoWindow, marker, location) {
+      return function () {
         infoWindow.setContent(
           '<div class="marker">' +
           '<h1>' + location.title + '</h1>' +
@@ -73,7 +73,7 @@ module.exports = {
      * Add the markers to the map
      * @param  {Array} locations Array of objects with each location detail
      */
-    var addMarkers = function(locations) {
+    var addMarkers = function (locations) {
       // Add the pins
       var markers = [];
       for (var j = 0; j < locations.length; j++) {
@@ -97,17 +97,17 @@ module.exports = {
         );
       }
       var markerCluster = new MarkerClusterer($scope.googleMap, markers,
-         {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'}
-         );
+        { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' }
+      );
     };
 
     /**
      * Find the user current location
      */
-    var findUserLocation = function() {
+    var findUserLocation = function () {
       if (navigator.geolocation) {
         browserSupportFlag = true;
-        navigator.geolocation.getCurrentPosition(function(position) {
+        navigator.geolocation.getCurrentPosition(function (position) {
           initialLocation = new google.maps.LatLng(
             position.coords.latitude, position.coords.longitude
           );
@@ -128,7 +128,7 @@ module.exports = {
               scale: 8
             }
           });
-        }, function() {
+        }, function () {
           browserSupportFlag = false;
           // handleNoGeolocation(browserSupportFlag);
         });
@@ -144,13 +144,13 @@ module.exports = {
      * should use
      * @return {String}        The height in pixels with "px" in the end
      */
-    var screenHeightLessButton = function(variant) {
+    var screenHeightLessButton = function (variant) {
       var height = parseInt($mFrameSize.height(), 10);
       return (height - 44) + (variant || 0) + "px";
     };
 
-    var loadMap = function() {
-      $timeout(function() {
+    var loadMap = function () {
+      $timeout(function () {
         // Wait until 'maps api' has been injected
         if (typeof google === "undefined" && typeof markerclusterer === "undefined") {
           loadMap();
@@ -189,8 +189,8 @@ module.exports = {
           ));
 
           // Remove the Moblets loader after the map finish loading
-          $scope.googleMap.addListener('idle', function() {
-            $timeout(function() {
+          $scope.googleMap.addListener('idle', function () {
+            $timeout(function () {
               $scope.moblet.isLoading = false;
 
               var zoomButtons = document
@@ -210,40 +210,40 @@ module.exports = {
       }, 100);
     };
 
-    var init = function() {
+    var init = function () {
       $scope.moblet.isLoading = true;
       dataLoadOptions = {
         cache: false
       };
       $mDataLoader.load($scope.moblet, dataLoadOptions)
-        .then(function(data) {
+        .then(function (data) {
           if (_.isEmpty(data)) {
             $scope.moblet.noContent = true;
             $scope.moblet.isLoading = false;
           } else {
             $scope.moblet.noContent = false;
-          // Put the data from the feed in the $scope object
+            // Put the data from the feed in the $scope object
             $scope.mapData = data;
-          // Split the screen in two portions. The show list button is 49px
-          // and the map will take the remaining portion of the screen.
-          // The list and the "show map" botton are set to 0.
+            // Split the screen in two portions. The show list button is 49px
+            // and the map will take the remaining portion of the screen.
+            // The list and the "show map" botton are set to 0.
             $scope.contentHeight = screenHeightLessButton(49);
             $scope.mapHeight = screenHeightLessButton();
             $scope.listHeight = 0;
             $scope.zoomListButtonHeight = "49px";
 
-          // Set the Ionic scroll javascript to the list of locations
-          // You need to set 'delegate-handle="listMapScroll"' on the
-          // HTML
+            // Set the Ionic scroll javascript to the list of locations
+            // You need to set 'delegate-handle="listMapScroll"' on the
+            // HTML
             // $ionicScrollDelegate.$getByHandle('listMapScroll').resize();
 
-            if (userApiKey in $scope.mapData){
-              if (! $scope.mapData.userApiKey) {
+            if ($scope.mapData.hasOwnProperty("userApiKey")) {
+              if (!$scope.mapData.userApiKey) {
                 console.log("MOBLET MAPA GPS - CHAVE VAZIA.");
                 //defaults to our key, opens a development darkened map, instead a grey screen error
                 $scope.mapData.userApiKey = "AIzaSyDNzstSiq9llIK8b49En0dT-yFA5YpManU";
               }
-            }else{
+            } else {
               $scope.mapData.userApiKey = "AIzaSyDNzstSiq9llIK8b49En0dT-yFA5YpManU";
             }
 
@@ -259,7 +259,7 @@ module.exports = {
     /*
      * Focus and expand the list of locations
      */
-    $scope.zoomList = function() {
+    $scope.zoomList = function () {
       $scope.listZooned = true;
       $scope.mapHeight = 0;
       $scope.listHeight = "auto";
@@ -271,10 +271,10 @@ module.exports = {
     /**
      * Focus and expand the map
      */
-    $scope.zoomMap = function() {
+    $scope.zoomMap = function () {
       $scope.listZooned = false;
       $scope.mapHeight = screenHeightLessButton();
-      $timeout(function() {
+      $timeout(function () {
         $scope.listHeight = 0;
       }, 500);
       // $scope.zoomMapButtonHeight = 0;
@@ -282,7 +282,7 @@ module.exports = {
       // $ionicScrollDelegate.$getByHandle('listMapScroll').resize();
     };
 
-    $scope.zoomToogle = function() {
+    $scope.zoomToogle = function () {
       if ($scope.listZooned) {
         $scope.zoomMap();
       } else {
@@ -292,7 +292,7 @@ module.exports = {
 
     $scope.iOsStandalone = $mPlatform.isIOS() && window.navigator.standalone;
 
-    $scope.getExternalMapLink = function(key) {
+    $scope.getExternalMapLink = function (key) {
       var address = $scope.mapData.locations[key].address;
       var latitude = $scope.mapData.locations[key].latitude;
       var longitude = $scope.mapData.locations[key].longitude;
@@ -301,7 +301,7 @@ module.exports = {
         address + '/@' + latitude + ',' + longitude;
     };
 
-    $scope.openLocation = function(key) {
+    $scope.openLocation = function (key) {
       $mAlert.dialog(
         $filter('translate')("open_in_map_app_title"),
         $filter('translate')("open_in_map_app_message"),
@@ -310,7 +310,7 @@ module.exports = {
           $filter('translate')("confirm")
         ]
       )
-        .then(function(success) {
+        .then(function (success) {
           if (success) {
             var mapUrl = $scope.getExternalMapLink(key);
             mapUrl = encodeURI(mapUrl);
@@ -320,15 +320,15 @@ module.exports = {
         });
     };
 
-    $rootScope.$on('$uFrameInteractions:ulist:refresh', function() {
-      $timeout(function() {
+    $rootScope.$on('$uFrameInteractions:ulist:refresh', function () {
+      $timeout(function () {
         init();
       }, 10);
     });
     var frameEvent = '$uFrameInteractions:refreshPage:moblet_refresh:';
     frameEvent += $stateParams.pageId;
-    $rootScope.$on(frameEvent, function() {
-      $timeout(function() {
+    $rootScope.$on(frameEvent, function () {
+      $timeout(function () {
         init();
       }, 10);
     });
