@@ -21,13 +21,14 @@ module.exports = {
       // "Rua James Watt, 84 - são paulo - sp"
       getGoogleMapsData(location.address, function(mapData) {
         // console.log(mapData);
-        if (mapData.status === 'OK') {
+
+        if ('lat' in mapData && 'lon' in mapData) {
           valid = true;
           response = {
-            data: {
-              latitude: mapData.results[0].geometry.location.lat,
-              longitude: mapData.results[0].geometry.location.lng
-            }
+              data: {
+                  latitude: mapData.lat,
+                  longitude: mapData.lon
+              }
           };
         } else {
           valid = false;
@@ -58,22 +59,66 @@ module.exports = {
  * @param  {Function} callback callback function that will receive the Google
  * Maps response as an Object
  */
-function getGoogleMapsData(address, callback) {
-  var http = require('http');
-  var response = '';
-  var host = 'http://maps.googleapis.com/maps/api/geocode/json' +
-  '?sensor=false&address=' + address;
+// function getGoogleMapsData(address, callback) {
+//   var https = require('https');
+//   var response = '';
+//   var host = 'https://maps.googleapis.com/maps/api/geocode/json' +
+//   '?key=AIzaSyAElFflv-vOQH-qdFMYcpeM-rIZqviBzQg&sensor=false&address=' + address;
 
-  http.get(host, function(res) {
-    res
-      .on("data", function(chunk) {
-        response += chunk;
-      })
-      .on('end', function() {
-        callback(JSON.parse(response));
-      })
-      .on('error', function(e) {
-        console.log(`Got error: ${e.message}`);
-      });
+//   https.get(host, function(res) {
+//     res
+//       .on("data", function(chunk) {
+//         response += chunk;
+//       })
+//       .on('end', function() {
+//         callback(JSON.parse(response));
+//       })
+//       .on('error', function(e) {
+//         console.log(`Got error: ${e.message}`);
+//       });
+//   });
+// }
+
+function getGoogleMapsData(address, callback) {
+  var https = require('https');
+  var response = '';
+  const querystring = require('querystring');
+
+  var options = {
+      hostname: 'nominatim.openstreetmap.org',
+      port: 443,
+      path: '/search?&format=json&limit=1&' + querystring.stringify({
+          q: address
+      }),
+      method: 'GET',
+      headers: {
+          'referer': 'https://fabricadeaplicativos.com.br/'
+      }
+  };
+
+  https.get(options, function (res) {
+      res
+          .on("data", function (chunk) {
+              response += chunk;
+          })
+          .on('end', function () {
+            try {
+              response = JSON.parse(response);
+              if (Array.isArray(response) && response.length > 0)
+                response = response[0];
+            } catch(e) {
+              console.error('Error in object paser. ' + e.message);
+              console.error(response);
+              response = { error: 'Error in object paser. ' + e.message};
+            }
+
+            callback(response);
+          })
+          .on('error', function (e) {
+              console.log(`Got error: ${e.message}`);
+              callback({
+                  error: e.message
+              });
+          });
   });
 }
