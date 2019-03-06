@@ -8,19 +8,19 @@
           "name": "title",
           "type": "text",
           "required": true,
-          "min-length": 1,
-          "max-length": 30
+          "minlength": 1,
+          "maxlength": 30
         },
         {
           "name": "address",
           "type": "text",
           "required": true,
-          "max-length": 255
+          "maxlength": 255
         },
         {
           "name": "latlng",
           "type": "text",
-          "max-length": 255
+          "maxlength": 255
         }
       ]
     },
@@ -39,7 +39,7 @@
       "name": "userApiKey",
       "required": true,
       "type": "text",
-      "max-length": 255
+      "maxlength": 255
     }
   ]
 }
