@@ -97,8 +97,7 @@ function getGoogleMapsData(address, callback) {
   };
 
   https.get(options, function (res) {
-      res
-          .on("data", function (chunk) {
+      res.on("data", function (chunk) {
               response += chunk;
           })
           .on('end', function () {
@@ -113,12 +112,11 @@ function getGoogleMapsData(address, callback) {
             }
 
             callback(response);
-          })
-          .on('error', function (e) {
-              console.log(`Got error: ${e.message}`);
-              callback({
-                  error: e.message
-              });
           });
+  }).on('error', function (e) {
+    console.log(`[ERROR] [m-map] (getGoogleMapsData): ${e.message}`);
+    callback({
+        error: e.message
+    });
   });
 }
