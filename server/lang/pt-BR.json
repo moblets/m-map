@@ -3,7 +3,7 @@
     "label": "Mapa GPS",
     "hint": "Crie um mapa com uma lista de lugares",
     "description": "Preencha os campos abaixo para criar a página de mapa",
-    "tutorial_link": "https://suporte.fabricadeaplicativos.com.br/hc/pt-br/articles/360024388771-Mapa-GPS"
+    "tutorial_link": "https://ajuda.fabapp.com/pt-BR/articles/3780121-mapa-gps"
   },
   "mapTypeId": {
     "label": "Tipo de mapa",
@@ -38,7 +38,6 @@
   },
   "userApiKey": {
     "label": "Google maps chave de API.",
-    "hint": "Google maps chave de API. https://suporte.fabricadeaplicativos.com.br/hc/pt-br",
     "error_address": "Chave inválida"
   }
 }
