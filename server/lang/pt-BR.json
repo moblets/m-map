@@ -15,7 +15,7 @@
     "hybrid": "Híbrido",
     "terrain": "Terreno"
   },
-  "locations": {
+  "items": {
     "label": "Lista de lugares",
     "hint": "Insira os lugares desejados",
     "list_button": "Adicionar lugares"
