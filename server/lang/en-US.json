@@ -15,7 +15,7 @@
     "hybrid": "Hybrid",
     "terrain": "Terrain"
   },
-  "items": {
+  "locations": {
     "label": "Locations list",
     "hint": "Insert the desired locations",
     "list_button": "Add locations"

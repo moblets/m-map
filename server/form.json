@@ -1,7 +1,7 @@
 {
   "fields": [
     {
-      "name": "items",
+      "name": "locations",
       "type": "list",
       "fields": [
         {
