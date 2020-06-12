@@ -2,7 +2,8 @@
   "moblet": {
     "label": "GPS Map",
     "hint": "Create a map with a list of locations",
-    "description": "Fill out the form below to create the map page"
+    "description": "Fill out the form below to create the map page",
+    "version": 2
   },
   "mapTypeId": {
     "label": "Map type",

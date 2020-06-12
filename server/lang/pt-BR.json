@@ -3,7 +3,8 @@
     "label": "Mapa GPS",
     "hint": "Crie um mapa com uma lista de lugares",
     "description": "Preencha os campos abaixo para criar a página de mapa",
-    "tutorial_link": "https://ajuda.fabapp.com/pt-BR/articles/3780121-mapa-gps"
+    "tutorial_link": "https://ajuda.fabapp.com/pt-BR/articles/3780121-mapa-gps",
+    "version": 2
   },
   "mapTypeId": {
     "label": "Tipo de mapa",
