@@ -3,6 +3,7 @@
     "label": "Título",
     "hint": "Título del lugar",
     "description": "Rellene el siguiente formulario para crear la página del mapa",
+    "tutorial_link": "https://ajuda.fabapp.com/pt-BR/articles/3780121-mapa-gps",
     "version": 2
   },
   "mapTypeId": {
@@ -38,7 +39,6 @@
   },
   "userApiKey": {
     "label": "Google maps clave de API.",
-    "hint": "Google maps clave de API. https://developers.google.com/maps/documentation/javascript/get-api-key",
     "error_address": "Clave de API inválida"
   }
 }
