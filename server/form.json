@@ -6,40 +6,63 @@
       "fields": [
         {
           "name": "title",
-          "type": "text",
+          "type": "input",
+          "inputType": "text",
           "required": true,
           "minlength": 1,
-          "maxlength": 30
+          "maxlength": 30,
+          "validations": [
+            { "name": "required" },
+            { "name": "minLength", "value": 1 },
+            { "name": "maxLength", "value": 30 }
+          ]
         },
         {
           "name": "address",
-          "type": "text",
+          "type": "input",
+          "inputType": "text",
           "required": true,
-          "maxlength": 255
+          "minlength": 1,
+          "maxlength": 255,
+          "validations": [
+            { "name": "required" },
+            { "name": "minLength", "value": 1 },
+            { "name": "maxLength", "value": 255 }
+          ]
         },
         {
           "name": "latlng",
-          "type": "text",
-          "maxlength": 255
+          "type": "input",
+          "inputType": "text",
+          "maxlength": 255,
+          "validations": [{ "name": "maxLength", "value": 255 }]
         }
       ]
     },
     {
       "name": "mapTypeId",
-      "required": true,
       "type": "select",
-      "values": {
-        "ROADMAP": "roadmap",
-        "SATELLITE": "satelite",
-        "HYBRID": "hybrid",
-        "TERRAIN": "terrain"
-      }
+      "required": true,
+      "options": [
+        { "value": "ROADMAP", "name": "roadmap" },
+        { "value": "SATELLITE", "name": "satelite" },
+        { "value": "HYBRID", "name": "hybrid" },
+        { "value": "TERRAIN", "name": "terrain" }
+      ],
+      "validations": [{ "name": "required" }]
     },
     {
       "name": "userApiKey",
+      "type": "input",
+      "inputType": "text",
       "required": true,
-      "type": "text",
-      "maxlength": 255
+      "minlength": 1,
+      "maxlength": 255,
+      "validations": [
+        { "name": "required" },
+        { "name": "minLength", "value": 1 },
+        { "name": "maxLength", "value": 255 }
+      ]
     }
   ]
 }
