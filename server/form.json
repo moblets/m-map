@@ -49,6 +49,12 @@
         { "value": "HYBRID", "name": "hybrid" },
         { "value": "TERRAIN", "name": "terrain" }
       ],
+      "values": {
+        "ROADMAP": "roadmap",
+        "SATELLITE": "satelite",
+        "HYBRID": "hybrid",
+        "TERRAIN": "terrain"
+      },
       "validations": [{ "name": "required" }]
     },
     {
