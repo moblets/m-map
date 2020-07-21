@@ -1,0 +1,47 @@
+{
+  "fields": [
+    {
+      "name": "locations",
+      "type": "list",
+      "fields": [
+        {
+          "name": "title",
+          "type": "text",
+          "required": true,
+          "minlength": 1,
+          "maxlength": 30
+        },
+        {
+          "name": "address",
+          "type": "text",
+          "required": true,
+          "minlength": 1,
+          "maxlength": 255
+        },
+        {
+          "name": "latlng",
+          "type": "text",
+          "maxlength": 255
+        }
+      ]
+    },
+    {
+      "name": "mapTypeId",
+      "type": "select",
+      "required": true,
+      "values": {
+        "ROADMAP": "roadmap",
+        "SATELLITE": "satelite",
+        "HYBRID": "hybrid",
+        "TERRAIN": "terrain"
+      }
+    },
+    {
+      "name": "userApiKey",
+      "type": "text",
+      "required": true,
+      "minlength": 1,
+      "maxlength": 255
+    }
+  ]
+}
